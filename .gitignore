@@ -1,0 +1,71 @@
+# Dependencies
+node_modules/
+
+# Package managers
+.pnpm-store/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Nx
+.nx/cache
+.nx/workspace-data
+
+# Build outputs
+dist/
+build/
+out/
+.next/
+.turbo/
+
+# Astro
+.astro/
+
+# SvelteKit
+.svelte-kit/
+
+# TypeScript
+*.tsbuildinfo
+
+# Tests & coverage
+coverage/
+.nyc_output/
+
+# Environment & secrets (keep .env.example committed)
+.env
+.env.*
+!.env.example
+
+# Cloudflare (Wrangler)
+.wrangler/
+.dev.vars
+
+# Supabase local
+supabase/.branches/
+supabase/.temp/
+
+# Python (optional compute apps)
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+.venv/
+venv/
+*.egg-info/
+.eggs/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors (uncomment if you prefer not to share editor config)
+# .idea/
+# .vscode/
+
+# Logs & misc
+*.log
+.cache/
