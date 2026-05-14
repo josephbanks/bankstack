@@ -10,11 +10,13 @@
     "pnpm": ">=10.0.0"
   },
   "scripts": {
-    "check": "nx show projects",
-    "build": "node tools/scripts/no-workspace-projects.mjs build",
-    "test": "node tools/scripts/no-workspace-projects.mjs test"
+    "check": "nx run-many -t check",
+    "build": "nx run-many -t build",
+    "test": "nx run-many -t test"
   },
   "devDependencies": {
-    "nx": "22.7.1"
+    "@types/node": "25.7.0",
+    "nx": "22.7.1",
+    "typescript": "6.0.3"
   }
 }

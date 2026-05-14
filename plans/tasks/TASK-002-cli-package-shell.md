@@ -1,7 +1,7 @@
 # TASK-002: CLI Package Shell
 
 ## Status
-Todo
+Done
 
 ## Depends On
 TASK-001
@@ -35,3 +35,15 @@ Run the package build/type-check command and invoke the local CLI binary through
 
 ## Handoff Notes
 TASK-003 should replace the placeholder command behavior with the MVP prompt and flag contract. TASK-004 should add the rendering engine after the shell exists.
+
+Implementation notes for follow-on work:
+
+- The package and binary are named `create-bankstack`.
+- The bin points at built output, `./dist/index.js`; local verification invoked that file directly after `pnpm run build`.
+- TypeScript is pinned exactly at `typescript@6.0.3`; Node types are pinned exactly at `@types/node@25.7.0`.
+- `pnpm --filter create-bankstack exec create-bankstack` was not used as the verification path because pnpm does not expose a package's own bin through that command before package installation/linking. The built binary entrypoint was verified with `node packages/create-bankstack/dist/index.js`, `node packages/create-bankstack/dist/index.js --version`, and the package test script.
+
+Primary/current sources checked:
+
+- npm `bin` field docs: https://docs.npmjs.com/cli/v11/configuring-npm/package-json#bin
+- TypeScript project references/build-mode docs: https://www.typescriptlang.org/docs/handbook/project-references
