@@ -1,7 +1,7 @@
 # TASK-001: Repo Foundation
 
 ## Status
-Todo
+Done
 
 ## Depends On
 TASK-000
@@ -34,4 +34,16 @@ Use pnpm as the only package manager. Prefer conservative root scripts that futu
 Run the safest available root checks after dependencies are configured. At minimum, inspect workspace files and run any non-mutating package manager validation available for the new setup.
 
 ## Handoff Notes
-TASK-002 should add the CLI package inside the workspace created here. If this task chooses tooling versions, record them in handoff notes or commit context.
+TASK-002 should add the CLI package inside the workspace created here.
+
+Tooling choices recorded for follow-on tasks:
+
+- pnpm is pinned through `packageManager` as `pnpm@10.33.2`, matching the local toolchain used to generate `pnpm-lock.yaml`.
+- Nx is pinned as an exact dev dependency at `nx@22.7.1`.
+- The root Node engine floor is `>=22.0.0`, leaving room for current LTS/runtime versions while avoiding older Node baselines for a new CLI.
+
+Primary/current sources checked:
+
+- pnpm workspace docs: https://pnpm.io/pnpm-workspace_yaml
+- Nx package-manager workspace docs: https://nx.dev/docs/getting-started/tutorials/crafting-your-workspace
+- Nx adoption docs for package-manager monorepos: https://nx.dev/docs/guides/adopting-nx/adding-to-monorepo

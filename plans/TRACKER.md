@@ -37,13 +37,13 @@ TASK-000
 
 | ID | Task | Status | Depends On | Blocks | Owner/Session | Acceptance Summary |
 | --- | --- | --- | --- | --- | --- | --- |
-| TASK-001 | [Repo Foundation](tasks/TASK-001-repo-foundation.md) | Todo | TASK-000 | TASK-002 | Unassigned | Root pnpm/Nx foundation, MIT license, baseline scripts, and metadata are present without product templates yet. |
+| TASK-001 | [Repo Foundation](tasks/TASK-001-repo-foundation.md) | Done | TASK-000 | TASK-002 | Codex implementation session | Root pnpm/Nx foundation, MIT license, baseline scripts, and metadata are present without product templates yet. |
 
 ## Phase 2: CLI Package
 
 | ID | Task | Status | Depends On | Blocks | Owner/Session | Acceptance Summary |
 | --- | --- | --- | --- | --- | --- | --- |
-| TASK-002 | [CLI Package Shell](tasks/TASK-002-cli-package-shell.md) | Todo | TASK-001 | TASK-003, TASK-004 | Unassigned | `packages/create-bankstack` exists with buildable TypeScript package metadata and a binary entrypoint stub. |
+| TASK-002 | [CLI Package Shell](tasks/TASK-002-cli-package-shell.md) | Todo | TASK-001 | TASK-003, TASK-004 | Unassigned; unblocked by TASK-001 | `packages/create-bankstack` exists with buildable TypeScript package metadata and a binary entrypoint stub. |
 | TASK-003 | [CLI Prompts And Flags](tasks/TASK-003-cli-prompts-and-flags.md) | Todo | TASK-002 | TASK-010 | Unassigned | CLI accepts the MVP prompts and automation flags without generating the final workspace yet. |
 | TASK-004 | [Template Rendering Engine](tasks/TASK-004-template-rendering-engine.md) | Todo | TASK-002 | TASK-005 | Unassigned | CLI has a template-first copy/render engine and exact dependency version policy. |
 

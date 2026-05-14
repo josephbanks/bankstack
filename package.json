@@ -1,0 +1,20 @@
+{
+  "name": "bankstack",
+  "version": "0.1.0-alpha.0",
+  "private": true,
+  "description": "Scaffolding and conventions for Cloudflare edge plus Supabase split-stack Nx monorepos.",
+  "license": "MIT",
+  "packageManager": "pnpm@10.33.2",
+  "engines": {
+    "node": ">=22.0.0",
+    "pnpm": ">=10.0.0"
+  },
+  "scripts": {
+    "check": "nx show projects",
+    "build": "node tools/scripts/no-workspace-projects.mjs build",
+    "test": "node tools/scripts/no-workspace-projects.mjs test"
+  },
+  "devDependencies": {
+    "nx": "22.7.1"
+  }
+}
