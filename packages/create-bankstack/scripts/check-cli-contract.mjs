@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { mkdir, rm, symlink, writeFile } from "node:fs/promises";
+import { mkdir, readFile, rm, symlink, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -41,10 +41,14 @@ try {
   assertExit(result, 0, "--yes flow");
   assertIncludes(result.stdout, "Project name: my-bankstack-app", "--yes stdout");
   assertIncludes(result.stdout, "Install dependencies: no", "--yes stdout");
+  assertIncludes(result.stdout, "Rendered placeholder template with 4 files.", "--yes stdout");
+  await assertRenderedPlaceholder(join(tempRoot, "my-bankstack-app"), "my-bankstack-app");
 
   result = run(["sample-app", "--name", "sample-app", "--no-install", "--no-git"], { cwd: tempRoot });
   assertExit(result, 0, "explicit flags");
   assertIncludes(result.stdout, "Target directory: sample-app", "explicit flags stdout");
+  assertIncludes(result.stdout, "TASK-005 will replace this placeholder", "explicit flags stdout");
+  await assertRenderedPlaceholder(join(tempRoot, "sample-app"), "sample-app");
 
   result = run(["--help"]);
   assertExit(result, 0, "--help");
@@ -84,4 +88,18 @@ try {
   assertIncludes(result.stderr, "cannot be a symbolic link", "symlink directory stderr");
 } finally {
   await rm(tempRoot, { force: true, recursive: true });
+}
+
+async function assertRenderedPlaceholder(targetDirectory, projectName) {
+  const readme = await readFile(join(targetDirectory, "README.md"), "utf8");
+  assertIncludes(readme, `# ${projectName}`, "CLI rendered README");
+
+  const manifest = await readFile(join(targetDirectory, ".bankstack-template.json"), "utf8");
+  assertIncludes(manifest, "\"name\": \"placeholder\"", "CLI rendered manifest");
+
+  const marker = await readFile(join(targetDirectory, "assets", "marker.bin"), "utf8");
+  assertIncludes(marker, "BANKSTACK_PLACEHOLDER_BINARY_MARKER", "CLI rendered marker");
+
+  const projectMarker = await readFile(join(targetDirectory, `${projectName}.txt`), "utf8");
+  assertIncludes(projectMarker, `Rendered marker for ${projectName}.`, "CLI rendered filename interpolation marker");
 }

@@ -1,7 +1,7 @@
 # TASK-004: Template Rendering Engine
 
 ## Status
-Todo
+Done
 
 ## Depends On
 TASK-002
@@ -35,3 +35,25 @@ Run the CLI or an internal script against a temporary directory and inspect rend
 
 ## Handoff Notes
 TASK-005 should replace or extend the placeholder template with the generated workspace root.
+
+Implementation notes:
+
+- Template rendering lives in `packages/create-bankstack/src/render-template.ts`.
+- The CLI renders the `placeholder` template into the validated target directory so TASK-004 has an end-to-end path without introducing real generated workspace files early.
+- Template variables use uppercase snake case with `{{VARIABLE_NAME}}`; the convention is documented in `packages/create-bankstack/templates/README.md`.
+- Text templates are rendered as UTF-8; unknown/non-text files are copied with `copyFile` to stay binary-safe for future assets.
+- Template symlinks are rejected.
+- Exact generated dependency policy is represented by `packages/create-bankstack/templates/versions.json`.
+- `package.json` includes both `dist` and `templates` in the publishable files list.
+
+Verification performed:
+
+- `pnpm run check`
+- `pnpm run build`
+- `pnpm run test`
+- `pnpm --filter create-bankstack pack --dry-run`
+
+Primary/current sources checked:
+
+- Node.js filesystem docs for `copyFile`, recursive directory reads, and `Dirent`: https://nodejs.org/api/fs.html
+- Node.js path docs for `relative` and `resolve`: https://nodejs.org/api/path.html

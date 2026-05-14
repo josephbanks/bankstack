@@ -45,13 +45,13 @@ TASK-000
 | --- | --- | --- | --- | --- | --- | --- |
 | TASK-002 | [CLI Package Shell](tasks/TASK-002-cli-package-shell.md) | Done | TASK-001 | TASK-003, TASK-004 | Codex implementation session | `packages/create-bankstack` exists with buildable TypeScript package metadata and a binary entrypoint stub. |
 | TASK-003 | [CLI Prompts And Flags](tasks/TASK-003-cli-prompts-and-flags.md) | Done | TASK-002 | TASK-010 | Codex implementation session | CLI accepts the MVP prompts and automation flags without generating the final workspace yet. |
-| TASK-004 | [Template Rendering Engine](tasks/TASK-004-template-rendering-engine.md) | Todo | TASK-002 | TASK-005 | Unassigned; unblocked by TASK-002 | CLI has a template-first copy/render engine and exact dependency version policy. |
+| TASK-004 | [Template Rendering Engine](tasks/TASK-004-template-rendering-engine.md) | Done | TASK-002 | TASK-005 | Codex implementation session | CLI has a template-first copy/render engine and exact dependency version policy. |
 
 ## Phase 3: Core Templates
 
 | ID | Task | Status | Depends On | Blocks | Owner/Session | Acceptance Summary |
 | --- | --- | --- | --- | --- | --- | --- |
-| TASK-005 | [Generated Workspace Foundation](tasks/TASK-005-generated-workspace-foundation.md) | Todo | TASK-004 | TASK-006, TASK-007, TASK-008 | Unassigned | Generated project root contains pnpm/Nx metadata, root scripts, and local-first defaults. |
+| TASK-005 | [Generated Workspace Foundation](tasks/TASK-005-generated-workspace-foundation.md) | Todo | TASK-004 | TASK-006, TASK-007, TASK-008 | Unassigned; unblocked by TASK-004 | Generated project root contains pnpm/Nx metadata, root scripts, and local-first defaults. |
 | TASK-006 | [Generated App Templates](tasks/TASK-006-generated-app-templates.md) | Todo | TASK-005 | TASK-009, TASK-011 | Unassigned | Generated Astro, SvelteKit, and Hono apps exist with a minimal connected demo. |
 | TASK-007 | [Generated Shared Packages](tasks/TASK-007-generated-shared-packages.md) | Todo | TASK-005 | TASK-009, TASK-011 | Unassigned | Generated shared UI, Supabase, and utility packages exist with MVP placeholders. |
 | TASK-008 | [Cloudflare And Supabase Conventions](tasks/TASK-008-cloudflare-and-supabase-conventions.md) | Todo | TASK-005 | TASK-009, TASK-011 | Unassigned | Generated Wrangler configs, service binding examples, env examples, and auth-boundary placeholders exist. |
