@@ -2,9 +2,16 @@
 
 import { relative } from "node:path";
 
-import { parseCliArgs, resolveOptions, type ResolvedCliOptions } from "./options.js";
+import {
+  parseCliArgs,
+  resolveOptions,
+  type ResolvedCliOptions,
+} from "./options.js";
 import { readPackageVersion } from "./package-info.js";
-import { renderTemplate, type RenderedTemplateFile } from "./render-template.js";
+import {
+  renderTemplate,
+  type RenderedTemplateFile,
+} from "./render-template.js";
 import { variablesForOptions } from "./template-variables.js";
 
 function printHelp(): void {
@@ -14,10 +21,16 @@ function printHelp(): void {
   console.log("  create-bankstack [directory] [options]");
   console.log("");
   console.log("Options:");
-  console.log("  --name <name>   Project/package name to use in generated metadata.");
+  console.log(
+    "  --name <name>   Project/package name to use in generated metadata.",
+  );
   console.log("  --yes           Use safe defaults for omitted choices.");
-  console.log("  --no-install    Skip dependency installation in the generated project.");
-  console.log("  --no-git        Skip git initialization in the generated project.");
+  console.log(
+    "  --no-install    Skip dependency installation in the generated project.",
+  );
+  console.log(
+    "  --no-git        Skip git initialization in the generated project.",
+  );
   console.log("  --force         Allow using a non-empty target directory.");
   console.log("  -v, --version   Print the CLI version.");
   console.log("  -h, --help      Print this help message.");
@@ -41,17 +54,26 @@ function printResolvedOptions(options: ResolvedCliOptions): void {
   console.log("Resolved options:");
   console.log(`  Project name: ${options.projectName}`);
   console.log(`  Target directory: ${directory}`);
-  console.log(`  Install dependencies: ${options.installDependencies ? "yes" : "no"}`);
+  console.log(
+    `  Install dependencies: ${options.installDependencies ? "yes" : "no"}`,
+  );
   console.log(`  Initialize git: ${options.initializeGit ? "yes" : "no"}`);
   console.log(`  Force non-empty directory: ${options.force ? "yes" : "no"}`);
 }
 
-function printRenderSummary(options: ResolvedCliOptions, renderedFiles: RenderedTemplateFile[]): void {
+function printRenderSummary(
+  options: ResolvedCliOptions,
+  renderedFiles: RenderedTemplateFile[],
+): void {
   const directory = formatDirectoryForOutput(options.targetDirectory);
 
   console.log("");
-  console.log(`Rendered placeholder template with ${renderedFiles.length} files.`);
-  console.log("TASK-005 will replace this placeholder with the generated workspace foundation.");
+  console.log(
+    `Rendered placeholder template with ${renderedFiles.length} files.`,
+  );
+  console.log(
+    "TASK-005 will replace this placeholder with the generated workspace foundation.",
+  );
   console.log("");
   console.log("Next steps:");
   console.log(`  cd ${directory}`);

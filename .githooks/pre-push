@@ -1,0 +1,5 @@
+#!/bin/sh
+set -eu
+
+echo "pre-push: checking that pushed refs are deployable"
+pnpm verify:push

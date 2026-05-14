@@ -10,11 +10,11 @@ This **bankstack** repository is also the **canonical dogfood**: the public site
 
 ## How the docs fit together
 
-| Document | Role |
-| -------- | ---- |
-| [ARCHITECTURE_OVERVIEW.md](ARCHITECTURE_OVERVIEW.md) | **What** you are building: topology, Cloudflare deployment, security and auth. |
-| [SETUP_GUIDE.md](SETUP_GUIDE.md) | **How** to assemble it step by step today—and what the CLI should eventually automate. |
-| This file | **Why** the monorepo is shaped this way and **what** ships to users (CLI, site, skills). |
+| Document                                             | Role                                                                                     |
+| ---------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| [ARCHITECTURE_OVERVIEW.md](ARCHITECTURE_OVERVIEW.md) | **What** you are building: topology, Cloudflare deployment, security and auth.           |
+| [SETUP_GUIDE.md](SETUP_GUIDE.md)                     | **How** to assemble it step by step today—and what the CLI should eventually automate.   |
+| This file                                            | **Why** the monorepo is shaped this way and **what** ships to users (CLI, site, skills). |
 
 ## Delivery surfaces
 

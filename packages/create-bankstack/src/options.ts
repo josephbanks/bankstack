@@ -43,7 +43,9 @@ export function parseCliArgs(args: string[]): ParsedCliOptions {
   });
 
   if (positionals.length > 1) {
-    throw new Error(`Expected at most one target directory, received ${positionals.length}.`);
+    throw new Error(
+      `Expected at most one target directory, received ${positionals.length}.`,
+    );
   }
 
   return {
@@ -95,7 +97,12 @@ function validateDirectoryInput(directory: string): string | undefined {
     return "Target directory must be a relative child directory name, not an absolute path.";
   }
 
-  if (directory === "." || directory === ".." || directory.includes("/") || directory.includes("\\")) {
+  if (
+    directory === "." ||
+    directory === ".." ||
+    directory.includes("/") ||
+    directory.includes("\\")
+  ) {
     return "Target directory must be a child directory name without path separators.";
   }
 
@@ -110,7 +117,10 @@ function validateDirectoryInput(directory: string): string | undefined {
   return undefined;
 }
 
-function validateTargetDirectory(targetDirectory: string, force: boolean): string | undefined {
+function validateTargetDirectory(
+  targetDirectory: string,
+  force: boolean,
+): string | undefined {
   if (!existsSync(targetDirectory)) {
     return undefined;
   }
@@ -144,7 +154,10 @@ async function promptText(
   validate?: (value: string) => string | undefined,
 ): Promise<string> {
   while (true) {
-    const answer = normalizePromptValue(await rl.question(`${message} (${fallback}): `), fallback);
+    const answer = normalizePromptValue(
+      await rl.question(`${message} (${fallback}): `),
+      fallback,
+    );
     const validationError = validate?.(answer);
 
     if (!validationError) {
@@ -155,11 +168,17 @@ async function promptText(
   }
 }
 
-async function promptBoolean(rl: readline.Interface, message: string, fallback: boolean): Promise<boolean> {
+async function promptBoolean(
+  rl: readline.Interface,
+  message: string,
+  fallback: boolean,
+): Promise<boolean> {
   const hint = fallback ? "Y/n" : "y/N";
 
   while (true) {
-    const answer = (await rl.question(`${message} (${hint}): `)).trim().toLowerCase();
+    const answer = (await rl.question(`${message} (${hint}): `))
+      .trim()
+      .toLowerCase();
 
     if (answer === "") {
       return fallback;
@@ -177,7 +196,9 @@ async function promptBoolean(rl: readline.Interface, message: string, fallback: 
   }
 }
 
-export async function resolveOptions(parsed: ParsedCliOptions): Promise<ResolvedCliOptions> {
+export async function resolveOptions(
+  parsed: ParsedCliOptions,
+): Promise<ResolvedCliOptions> {
   const interactive = isInteractive(parsed.yes);
   const rl = readline.createInterface({ input, output });
 
@@ -185,7 +206,14 @@ export async function resolveOptions(parsed: ParsedCliOptions): Promise<Resolved
     const fallbackDirectory = defaultDirectoryName(parsed.name);
     const directory =
       parsed.directory ??
-      (interactive ? await promptText(rl, "Target directory", fallbackDirectory, validateDirectoryInput) : fallbackDirectory);
+      (interactive
+        ? await promptText(
+            rl,
+            "Target directory",
+            fallbackDirectory,
+            validateDirectoryInput,
+          )
+        : fallbackDirectory);
     const directoryValidationError = validateDirectoryInput(directory);
 
     if (directoryValidationError) {
@@ -196,14 +224,24 @@ export async function resolveOptions(parsed: ParsedCliOptions): Promise<Resolved
     const fallbackName = parsed.name ?? basename(targetDirectory);
     const projectName =
       parsed.name ??
-      (interactive ? await promptText(rl, "Project name", fallbackName, validateProjectName) : fallbackName);
+      (interactive
+        ? await promptText(
+            rl,
+            "Project name",
+            fallbackName,
+            validateProjectName,
+          )
+        : fallbackName);
     const validationError = validateProjectName(projectName);
 
     if (validationError) {
       throw new Error(validationError);
     }
 
-    const targetDirectoryError = validateTargetDirectory(targetDirectory, parsed.force);
+    const targetDirectoryError = validateTargetDirectory(
+      targetDirectory,
+      parsed.force,
+    );
 
     if (targetDirectoryError) {
       throw new Error(targetDirectoryError);
@@ -211,9 +249,14 @@ export async function resolveOptions(parsed: ParsedCliOptions): Promise<Resolved
 
     const installDependencies =
       parsed.installDependencies ??
-      (interactive ? await promptBoolean(rl, "Install dependencies after generation", true) : true);
+      (interactive
+        ? await promptBoolean(rl, "Install dependencies after generation", true)
+        : true);
     const initializeGit =
-      parsed.initializeGit ?? (interactive ? await promptBoolean(rl, "Initialize a git repository", true) : true);
+      parsed.initializeGit ??
+      (interactive
+        ? await promptBoolean(rl, "Initialize a git repository", true)
+        : true);
 
     return {
       force: parsed.force,

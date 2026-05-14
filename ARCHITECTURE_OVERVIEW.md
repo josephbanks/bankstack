@@ -1,9 +1,11 @@
 # 2026 Cloudflare Edge Architecture: The "Split-Stack"
 
 ## Overview
+
 This project uses a "Split-Stack" architecture designed for maximum performance on the Cloudflare global network while keeping operational costs at or near zero for the Free Tier. It utilizes a lightning-fast TypeScript edge API, with an optional Python compute engine for heavy asynchronous background tasks.
 
 ## The Monorepo Structure (Nx)
+
 We use an Nx monorepo to manage polyglot applications and shared logic.
 
 ```text
@@ -22,18 +24,19 @@ We use an Nx monorepo to manage polyglot applications and shared logic.
 ```
 
 ## Deployment Strategy
+
 The core stack is hosted entirely on Cloudflare to leverage **Service Bindings** for sub-1ms internal communication.
 
-* **[marketing].[domain].com**: Cloudflare Pages (Astro Static)
-* **[dashboard].[domain].com**: Cloudflare Workers (SvelteKit Adapter)
-* **[api].[domain].com**: Cloudflare Workers (Hono on Workers)
+- **[marketing].[domain].com**: Cloudflare Pages (Astro Static)
+- **[dashboard].[domain].com**: Cloudflare Workers (SvelteKit Adapter)
+- **[api].[domain].com**: Cloudflare Workers (Hono on Workers)
 
 ### Optional Compute Layer:
 
-* **Background Jobs**: If `/apps/compute` is used, it is deployed as a containerized service (e.g., Google Cloud Run, Fly.io) and consumes jobs asynchronously via Cloudflare Queues or upstash/Redis.
+- **Background Jobs**: If `/apps/compute` is used, it is deployed as a containerized service (e.g., Google Cloud Run, Fly.io) and consumes jobs asynchronously via Cloudflare Queues or upstash/Redis.
 
 ## Security & Auth
 
-* **Identity**: Supabase Auth (JWT-based).
-* **Gatekeeper**: SvelteKit Middleware + Hono validates sessions at the edge.
-* **Authorization**: Supabase RLS (Row-Level Security) protects database access natively, ensuring security even across the different microservices.
+- **Identity**: Supabase Auth (JWT-based).
+- **Gatekeeper**: SvelteKit Middleware + Hono validates sessions at the edge.
+- **Authorization**: Supabase RLS (Row-Level Security) protects database access natively, ensuring security even across the different microservices.

@@ -1,4 +1,10 @@
-import { copyFile, mkdir, readdir, readFile, writeFile } from "node:fs/promises";
+import {
+  copyFile,
+  mkdir,
+  readdir,
+  readFile,
+  writeFile,
+} from "node:fs/promises";
 import { dirname, isAbsolute, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -41,29 +47,41 @@ export function templatesRoot(): string {
 
 function assertTemplateVariableName(name: string): void {
   if (!/^[A-Z][A-Z0-9_]*$/.test(name)) {
-    throw new Error(`Invalid template variable name "${name}". Use uppercase snake case.`);
+    throw new Error(
+      `Invalid template variable name "${name}". Use uppercase snake case.`,
+    );
   }
 }
 
 function isContainedBy(root: string, candidate: string): boolean {
   const relativePath = relative(root, candidate);
-  return relativePath === "" || (!relativePath.startsWith("..") && !isAbsolute(relativePath));
+  return (
+    relativePath === "" ||
+    (!relativePath.startsWith("..") && !isAbsolute(relativePath))
+  );
 }
 
-function assertContainedPath(root: string, candidate: string, label: string): void {
+function assertContainedPath(
+  root: string,
+  candidate: string,
+  label: string,
+): void {
   if (!isContainedBy(root, candidate)) {
     throw new Error(`${label} escapes its root: ${relative(root, candidate)}`);
   }
 }
 
 function renderString(input: string, variables: TemplateVariables): string {
-  return input.replaceAll(/\{\{([A-Z][A-Z0-9_]*)\}\}/g, (token, name: string) => {
-    if (Object.hasOwn(variables, name)) {
-      return variables[name];
-    }
+  return input.replaceAll(
+    /\{\{([A-Z][A-Z0-9_]*)\}\}/g,
+    (token, name: string) => {
+      if (Object.hasOwn(variables, name)) {
+        return variables[name];
+      }
 
-    throw new Error(`Missing template variable for ${token}.`);
-  });
+      throw new Error(`Missing template variable for ${token}.`);
+    },
+  );
 }
 
 function isTextTemplate(fileName: string): boolean {
@@ -75,9 +93,14 @@ function isTextTemplate(fileName: string): boolean {
   return TEXT_TEMPLATE_EXTENSIONS.has(extension);
 }
 
-function destinationName(templateName: string, variables: TemplateVariables): string {
+function destinationName(
+  templateName: string,
+  variables: TemplateVariables,
+): string {
   const renderedName = renderString(templateName, variables);
-  return renderedName.endsWith(".template") ? renderedName.slice(0, -".template".length) : renderedName;
+  return renderedName.endsWith(".template")
+    ? renderedName.slice(0, -".template".length)
+    : renderedName;
 }
 
 function relativeTemplatePath(root: string, path: string): string {
@@ -102,20 +125,34 @@ async function renderEntry(
     }
 
     if (entry.isSymbolicLink()) {
-      throw new Error(`Template symlinks are not allowed: ${relativeTemplatePath(templateRoot, join(sourcePath, entry.name))}`);
+      throw new Error(
+        `Template symlinks are not allowed: ${relativeTemplatePath(templateRoot, join(sourcePath, entry.name))}`,
+      );
     }
 
     const nextSource = join(sourcePath, entry.name);
-    const nextTarget = resolve(targetPath, destinationName(entry.name, variables));
+    const nextTarget = resolve(
+      targetPath,
+      destinationName(entry.name, variables),
+    );
     assertContainedPath(targetRoot, nextTarget, "Rendered template path");
 
     if (entry.isDirectory()) {
-      await renderEntry(templateRoot, targetRoot, nextSource, nextTarget, variables, renderedFiles);
+      await renderEntry(
+        templateRoot,
+        targetRoot,
+        nextSource,
+        nextTarget,
+        variables,
+        renderedFiles,
+      );
       continue;
     }
 
     if (!entry.isFile()) {
-      throw new Error(`Unsupported template entry: ${relativeTemplatePath(templateRoot, nextSource)}`);
+      throw new Error(
+        `Unsupported template entry: ${relativeTemplatePath(templateRoot, nextSource)}`,
+      );
     }
 
     await mkdir(dirname(nextTarget), { recursive: true });
@@ -140,7 +177,9 @@ async function renderEntry(
   }
 }
 
-export async function renderTemplate(options: RenderTemplateOptions): Promise<RenderedTemplateFile[]> {
+export async function renderTemplate(
+  options: RenderTemplateOptions,
+): Promise<RenderedTemplateFile[]> {
   for (const name of Object.keys(options.variables)) {
     assertTemplateVariableName(name);
   }
@@ -151,7 +190,14 @@ export async function renderTemplate(options: RenderTemplateOptions): Promise<Re
   const renderedFiles: RenderedTemplateFile[] = [];
 
   assertContainedPath(root, templateRoot, "Template path");
-  await renderEntry(templateRoot, targetRoot, templateRoot, targetRoot, options.variables, renderedFiles);
+  await renderEntry(
+    templateRoot,
+    targetRoot,
+    templateRoot,
+    targetRoot,
+    options.variables,
+    renderedFiles,
+  );
 
   return renderedFiles;
 }

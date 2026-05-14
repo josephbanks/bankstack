@@ -2,10 +2,7 @@
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "defaultBase": "main",
   "namedInputs": {
-    "default": [
-      "{projectRoot}/**/*",
-      "sharedGlobals"
-    ],
+    "default": ["{projectRoot}/**/*", "sharedGlobals"],
     "sharedGlobals": [
       "{workspaceRoot}/package.json",
       "{workspaceRoot}/pnpm-lock.yaml",
@@ -16,34 +13,18 @@
   "targetDefaults": {
     "build": {
       "cache": true,
-      "inputs": [
-        "default",
-        "^default"
-      ],
-      "outputs": [
-        "{projectRoot}/dist",
-        "{projectRoot}/build"
-      ]
+      "inputs": ["default", "^default"],
+      "outputs": ["{projectRoot}/dist", "{projectRoot}/build"]
     },
     "check": {
       "cache": true,
-      "inputs": [
-        "default",
-        "^default"
-      ]
+      "inputs": ["default", "^default"]
     },
     "test": {
       "cache": true,
-      "dependsOn": [
-        "build"
-      ],
-      "inputs": [
-        "default",
-        "^default"
-      ],
-      "outputs": [
-        "{projectRoot}/coverage"
-      ]
+      "dependsOn": ["build"],
+      "inputs": ["default", "^default"],
+      "outputs": ["{projectRoot}/coverage"]
     }
   },
   "analytics": false
