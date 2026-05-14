@@ -55,7 +55,7 @@ try {
   assertIncludes(result.stdout, "Install dependencies: no", "--yes stdout");
   assertIncludes(
     result.stdout,
-    "Rendered workspace foundation with 7 files.",
+    "Rendered workspace foundation with 24 files.",
     "--yes stdout",
   );
   await assertRenderedWorkspace(
@@ -75,7 +75,7 @@ try {
   );
   assertIncludes(
     result.stdout,
-    "Rendered workspace foundation with 7 files.",
+    "Rendered workspace foundation with 24 files.",
     "explicit flags stdout",
   );
   await assertRenderedWorkspace(join(tempRoot, "sample-app"), "sample-app");
@@ -169,7 +169,7 @@ try {
 async function assertRenderedWorkspace(targetDirectory, projectName) {
   const readme = await readFile(join(targetDirectory, "README.md"), "utf8");
   assertIncludes(readme, `# ${projectName}`, "CLI rendered README");
-  assertIncludes(readme, "does not create an app", "CLI rendered README");
+  assertIncludes(readme, "apps/dashboard", "CLI rendered README");
 
   const packageJson = await readFile(
     join(targetDirectory, "package.json"),
@@ -226,4 +226,45 @@ async function assertRenderedWorkspace(targetDirectory, projectName) {
     "pnpm-lock.yaml",
     "CLI rendered .prettierignore",
   );
+
+  const marketingPage = await readFile(
+    join(targetDirectory, "apps", "marketing", "src", "pages", "index.astro"),
+    "utf8",
+  );
+  assertIncludes(
+    marketingPage,
+    `const projectName = "${projectName}";`,
+    "CLI rendered marketing page",
+  );
+  assertIncludes(
+    marketingPage,
+    "{projectName} ships on a split stack.",
+    "CLI rendered marketing page",
+  );
+
+  const dashboardHealthProxy = await readFile(
+    join(
+      targetDirectory,
+      "apps",
+      "dashboard",
+      "src",
+      "routes",
+      "api",
+      "health",
+      "+server.ts",
+    ),
+    "utf8",
+  );
+  assertIncludes(
+    dashboardHealthProxy,
+    "BANKSTACK_API_URL",
+    "CLI rendered dashboard health proxy",
+  );
+
+  const apiApp = await readFile(
+    join(targetDirectory, "apps", "api", "src", "app.ts"),
+    "utf8",
+  );
+  assertIncludes(apiApp, 'app.get("/health"', "CLI rendered API app");
+  assertIncludes(apiApp, '"/protected/*"', "CLI rendered API app");
 }

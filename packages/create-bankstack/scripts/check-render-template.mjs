@@ -9,7 +9,6 @@ const root = fileURLToPath(new URL("..", import.meta.url));
 const versions = JSON.parse(
   await readFile(join(root, "templates", "versions.json"), "utf8"),
 );
-const pnpmVersion = versions.packageManager.replace(/^pnpm@/, "");
 const tempRoot = await mkdtemp(join(tmpdir(), "create-bankstack-render-"));
 
 function assertIncludes(value, expected, label) {
@@ -20,23 +19,23 @@ function assertIncludes(value, expected, label) {
   }
 }
 
-function workspaceVariables(projectName) {
-  return {
-    DEV_DEPENDENCY_NX: versions.devDependencies.nx,
-    DEV_DEPENDENCY_PRETTIER: versions.devDependencies.prettier,
-    DEV_DEPENDENCY_TYPES_NODE: versions.devDependencies["@types/node"],
-    DEV_DEPENDENCY_TYPESCRIPT: versions.devDependencies.typescript,
-    NODE_ENGINE: versions.node,
-    PACKAGE_MANAGER: versions.packageManager,
-    PNPM_ENGINE: pnpmVersion,
-    PROJECT_NAME: projectName,
-  };
-}
-
 try {
   const { renderTemplate } = await import(
     join(root, "dist", "render-template.js")
   );
+  const { variablesForOptions } = await import(
+    join(root, "dist", "template-variables.js")
+  );
+  const workspaceVariables = (projectName) =>
+    variablesForOptions({
+      force: false,
+      initializeGit: false,
+      installDependencies: false,
+      interactive: false,
+      projectName,
+      targetDirectory: join(tempRoot, projectName),
+      yes: true,
+    });
   const targetDirectory = join(tempRoot, "rendered-app");
   const renderedFiles = await renderTemplate({
     targetDirectory,
@@ -44,15 +43,15 @@ try {
     variables: workspaceVariables("rendered-app"),
   });
 
-  if (renderedFiles.length !== 7) {
+  if (renderedFiles.length !== 24) {
     throw new Error(
-      `Expected 7 rendered files, received ${renderedFiles.length}.`,
+      `Expected 24 rendered files, received ${renderedFiles.length}.`,
     );
   }
 
   const readme = await readFile(join(targetDirectory, "README.md"), "utf8");
   assertIncludes(readme, "# rendered-app", "rendered README");
-  assertIncludes(readme, "does not create an app", "rendered README");
+  assertIncludes(readme, "apps/marketing", "rendered README");
 
   const packageJson = await readFile(
     join(targetDirectory, "package.json"),
@@ -88,6 +87,33 @@ try {
     "utf8",
   );
   assertIncludes(prettierIgnore, "pnpm-lock.yaml", "rendered .prettierignore");
+
+  const marketingPackage = await readFile(
+    join(targetDirectory, "apps", "marketing", "package.json"),
+    "utf8",
+  );
+  assertIncludes(
+    marketingPackage,
+    `"astro": "${versions.dependencies.astro}"`,
+    "rendered marketing package",
+  );
+
+  const dashboardPage = await readFile(
+    join(targetDirectory, "apps", "dashboard", "src", "routes", "+page.svelte"),
+    "utf8",
+  );
+  assertIncludes(
+    dashboardPage,
+    "rendered-app control surface",
+    "rendered dashboard page",
+  );
+
+  const apiApp = await readFile(
+    join(targetDirectory, "apps", "api", "src", "app.ts"),
+    "utf8",
+  );
+  assertIncludes(apiApp, 'app.get("/health"', "rendered API app");
+  assertIncludes(apiApp, '"/protected/*"', "rendered API app");
 
   const placeholderTarget = join(tempRoot, "placeholder-app");
   const placeholderFiles = await renderTemplate({

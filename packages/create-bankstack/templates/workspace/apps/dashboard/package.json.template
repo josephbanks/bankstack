@@ -1,0 +1,21 @@
+{
+  "name": "@{{PROJECT_NAME}}/dashboard",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite dev --host 127.0.0.1 --port 5173",
+    "build": "vite build",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "preview": "vite preview --host 127.0.0.1 --port 5173"
+  },
+  "devDependencies": {
+    "@sveltejs/adapter-auto": "{{DEV_DEPENDENCY_SVELTEJS_ADAPTER_AUTO}}",
+    "@sveltejs/kit": "{{DEV_DEPENDENCY_SVELTEJS_KIT}}",
+    "@sveltejs/vite-plugin-svelte": "{{DEV_DEPENDENCY_SVELTEJS_VITE_PLUGIN_SVELTE}}",
+    "svelte": "{{DEV_DEPENDENCY_SVELTE}}",
+    "svelte-check": "{{DEV_DEPENDENCY_SVELTE_CHECK}}",
+    "typescript": "{{DEV_DEPENDENCY_TYPESCRIPT}}",
+    "vite": "{{DEV_DEPENDENCY_VITE}}"
+  }
+}

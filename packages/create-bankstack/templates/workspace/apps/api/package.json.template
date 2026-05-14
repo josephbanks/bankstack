@@ -1,0 +1,21 @@
+{
+  "name": "@{{PROJECT_NAME}}/api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc -p tsconfig.json",
+    "check": "tsc -p tsconfig.json --noEmit",
+    "start": "node dist/server.js"
+  },
+  "dependencies": {
+    "@hono/node-server": "{{DEPENDENCY_HONO_NODE_SERVER}}",
+    "hono": "{{DEPENDENCY_HONO}}"
+  },
+  "devDependencies": {
+    "@types/node": "{{DEV_DEPENDENCY_TYPES_NODE}}",
+    "tsx": "{{DEV_DEPENDENCY_TSX}}",
+    "typescript": "{{DEV_DEPENDENCY_TYPESCRIPT}}"
+  }
+}

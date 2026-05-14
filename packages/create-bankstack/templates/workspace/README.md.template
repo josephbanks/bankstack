@@ -17,4 +17,12 @@ pnpm build
 pnpm test
 ```
 
-The root workspace is ready for the Bankstack app and package templates that will be added by later generator slices. This foundation does not create an app, require external service credentials, or include a Python compute layer.
+The generated workspace is local-first: it does not require external service credentials to render or build, and it does not include a Python compute layer.
+
+## Apps
+
+- `apps/marketing`: Astro marketing surface.
+- `apps/dashboard`: SvelteKit dashboard shell with a local API health call path.
+- `apps/api`: Hono API with `/health` and a protected-route stub.
+
+The dashboard can render without Cloudflare or Supabase credentials. If the Hono API is not running locally, the dashboard health proxy returns a local fallback response.

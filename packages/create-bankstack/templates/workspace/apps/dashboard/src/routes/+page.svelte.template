@@ -1,0 +1,217 @@
+<script lang="ts">
+  import type { PageProps } from "./$types";
+
+  let { data }: PageProps = $props();
+</script>
+
+<svelte:head>
+  <title>Bankstack Dashboard</title>
+  <meta
+    name="description"
+    content="A local-first Bankstack dashboard shell with API health visibility."
+  />
+</svelte:head>
+
+<main class="shell">
+  <aside class="rail" aria-label="Workspace navigation">
+    <a class="brand" href="/" aria-label="Bankstack dashboard home">
+      <span class="mark" aria-hidden="true">B</span>
+      <span>Dashboard</span>
+    </a>
+    <nav>
+      <a aria-current="page" href="/">Overview</a>
+      <a href="/">Requests</a>
+      <a href="/">Settings</a>
+    </nav>
+  </aside>
+
+  <section class="content" aria-labelledby="dashboard-title">
+    <p class="eyebrow">Local workspace</p>
+    <h1 id="dashboard-title">{{PROJECT_NAME}} control surface</h1>
+    <p class="lede">
+      The dashboard shell is ready for authenticated product workflows while
+      the API boundary stays visible during local development.
+    </p>
+
+    <div class="status-grid">
+      <article class="status-card">
+        <span class="label">API health</span>
+        <strong class:online={data.health.ok}>{data.health.label}</strong>
+        <p>{data.health.message}</p>
+      </article>
+      <article class="status-card">
+        <span class="label">Boundary</span>
+        <strong>Protected route stub</strong>
+        <p>
+          API auth middleware responds at <code>/protected/profile</code> and is
+          ready for Supabase JWT verification in a later slice.
+        </p>
+      </article>
+    </div>
+  </section>
+</main>
+
+<style>
+  :global(body) {
+    margin: 0;
+    font-family:
+      Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+      "Segoe UI", sans-serif;
+    color: oklch(24% 0.035 240);
+    background: oklch(97% 0.01 230);
+  }
+
+  :global(a) {
+    color: inherit;
+  }
+
+  .shell {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: minmax(14rem, 18rem) 1fr;
+  }
+
+  .rail {
+    padding: 1.25rem;
+    background: oklch(23% 0.045 245);
+    color: oklch(94% 0.012 235);
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin-bottom: 2rem;
+    font-weight: 750;
+    text-decoration: none;
+  }
+
+  .mark {
+    display: grid;
+    width: 2rem;
+    height: 2rem;
+    place-items: center;
+    border-radius: 0.35rem;
+    color: oklch(22% 0.045 245);
+    background: oklch(84% 0.16 170);
+  }
+
+  nav {
+    display: grid;
+    gap: 0.4rem;
+  }
+
+  nav a {
+    border-radius: 0.35rem;
+    padding: 0.7rem 0.75rem;
+    color: oklch(86% 0.025 240);
+    text-decoration: none;
+  }
+
+  nav a[aria-current="page"] {
+    color: oklch(98% 0.006 235);
+    background: oklch(33% 0.055 245);
+  }
+
+  .content {
+    width: min(100% - 3rem, 68rem);
+    margin: 0 auto;
+    padding: 5rem 0;
+  }
+
+  .eyebrow,
+  .label {
+    margin: 0;
+    color: oklch(48% 0.075 210);
+    font-size: 0.78rem;
+    font-weight: 750;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    max-width: 13ch;
+    margin: 0.5rem 0 1rem;
+    font-size: clamp(2.4rem, 7vw, 5.4rem);
+    line-height: 0.95;
+    letter-spacing: 0;
+  }
+
+  .lede {
+    max-width: 42rem;
+    margin: 0;
+    color: oklch(39% 0.035 235);
+    font-size: 1.1rem;
+    line-height: 1.65;
+  }
+
+  .status-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    margin-top: 3rem;
+  }
+
+  .status-card {
+    min-height: 11rem;
+    border: 1px solid oklch(86% 0.02 230);
+    border-radius: 0.5rem;
+    padding: 1.25rem;
+    background: oklch(99% 0.004 230);
+  }
+
+  strong {
+    display: block;
+    margin-top: 0.6rem;
+    color: oklch(24% 0.035 240);
+    font-size: 1.35rem;
+  }
+
+  strong.online {
+    color: oklch(45% 0.14 160);
+  }
+
+  .status-card p {
+    margin: 0.7rem 0 0;
+    color: oklch(42% 0.034 235);
+    line-height: 1.6;
+  }
+
+  code {
+    border-radius: 0.25rem;
+    padding: 0.15rem 0.3rem;
+    background: oklch(93% 0.016 230);
+    font-size: 0.92em;
+  }
+
+  @media (max-width: 760px) {
+    .shell {
+      grid-template-columns: 1fr;
+    }
+
+    .rail {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      margin-bottom: 0;
+    }
+
+    nav {
+      display: flex;
+      overflow-x: auto;
+    }
+
+    .content {
+      width: min(100% - 2rem, 42rem);
+      padding: 3rem 0;
+    }
+
+    .status-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -25,5 +25,5 @@ Generated dependency versions must come from `versions.json` in this directory. 
 
 ## Template Sets
 
-- `workspace` is the generated project root: pnpm workspace metadata, Nx defaults, TypeScript defaults, root scripts, and local-only ignore rules.
+- `workspace` is the generated project: pnpm workspace metadata, Nx defaults, TypeScript defaults, root scripts, local-only ignore rules, and the core app templates.
 - `placeholder` is kept as a tiny renderer fixture for binary copy and filename interpolation checks.
