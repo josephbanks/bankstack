@@ -43,15 +43,20 @@ try {
     variables: workspaceVariables("rendered-app"),
   });
 
-  if (renderedFiles.length !== 24) {
+  if (renderedFiles.length !== 48) {
     throw new Error(
-      `Expected 24 rendered files, received ${renderedFiles.length}.`,
+      `Expected 48 rendered files, received ${renderedFiles.length}.`,
     );
   }
 
   const readme = await readFile(join(targetDirectory, "README.md"), "utf8");
   assertIncludes(readme, "# rendered-app", "rendered README");
   assertIncludes(readme, "apps/marketing", "rendered README");
+  assertIncludes(readme, "packages/supabase", "rendered README");
+
+  const setupNotes = await readFile(join(targetDirectory, "SETUP.md"), "utf8");
+  assertIncludes(setupNotes, "pnpm install", "rendered SETUP notes");
+  assertIncludes(setupNotes, "wrangler.jsonc", "rendered SETUP notes");
 
   const packageJson = await readFile(
     join(targetDirectory, "package.json"),
@@ -97,6 +102,11 @@ try {
     `"astro": "${versions.dependencies.astro}"`,
     "rendered marketing package",
   );
+  assertIncludes(
+    marketingPackage,
+    '"@rendered-app/ui": "workspace:*"',
+    "rendered marketing package",
+  );
 
   const dashboardPage = await readFile(
     join(targetDirectory, "apps", "dashboard", "src", "routes", "+page.svelte"),
@@ -114,6 +124,51 @@ try {
   );
   assertIncludes(apiApp, 'app.get("/health"', "rendered API app");
   assertIncludes(apiApp, '"/protected/*"', "rendered API app");
+
+  const dashboardWrangler = await readFile(
+    join(targetDirectory, "apps", "dashboard", "wrangler.jsonc"),
+    "utf8",
+  );
+  assertIncludes(
+    dashboardWrangler,
+    '"services"',
+    "rendered dashboard wrangler",
+  );
+  assertIncludes(
+    dashboardWrangler,
+    '"binding": "API"',
+    "rendered dashboard wrangler",
+  );
+
+  const apiWrangler = await readFile(
+    join(targetDirectory, "apps", "api", "wrangler.jsonc"),
+    "utf8",
+  );
+  assertIncludes(
+    apiWrangler,
+    '"main": "src/worker.ts"',
+    "rendered API wrangler",
+  );
+
+  const uiPackage = await readFile(
+    join(targetDirectory, "packages", "ui", "package.json"),
+    "utf8",
+  );
+  assertIncludes(
+    uiPackage,
+    '"name": "@rendered-app/ui"',
+    "rendered UI package",
+  );
+
+  const supabaseEnv = await readFile(
+    join(targetDirectory, "packages", "supabase", "src", "env.ts"),
+    "utf8",
+  );
+  assertIncludes(
+    supabaseEnv,
+    "PUBLIC_SUPABASE_PUBLISHABLE_KEY",
+    "rendered Supabase env",
+  );
 
   const placeholderTarget = join(tempRoot, "placeholder-app");
   const placeholderFiles = await renderTemplate({

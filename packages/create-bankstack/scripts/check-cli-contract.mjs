@@ -55,7 +55,7 @@ try {
   assertIncludes(result.stdout, "Install dependencies: no", "--yes stdout");
   assertIncludes(
     result.stdout,
-    "Rendered workspace foundation with 24 files.",
+    "Rendered workspace foundation with 48 files.",
     "--yes stdout",
   );
   await assertRenderedWorkspace(
@@ -75,7 +75,7 @@ try {
   );
   assertIncludes(
     result.stdout,
-    "Rendered workspace foundation with 24 files.",
+    "Rendered workspace foundation with 48 files.",
     "explicit flags stdout",
   );
   await assertRenderedWorkspace(join(tempRoot, "sample-app"), "sample-app");
@@ -170,6 +170,11 @@ async function assertRenderedWorkspace(targetDirectory, projectName) {
   const readme = await readFile(join(targetDirectory, "README.md"), "utf8");
   assertIncludes(readme, `# ${projectName}`, "CLI rendered README");
   assertIncludes(readme, "apps/dashboard", "CLI rendered README");
+  assertIncludes(readme, "packages/shared-utils", "CLI rendered README");
+
+  const setupNotes = await readFile(join(targetDirectory, "SETUP.md"), "utf8");
+  assertIncludes(setupNotes, "pnpm only", "CLI rendered setup notes");
+  assertIncludes(setupNotes, "service binding", "CLI rendered setup notes");
 
   const packageJson = await readFile(
     join(targetDirectory, "package.json"),
@@ -260,6 +265,11 @@ async function assertRenderedWorkspace(targetDirectory, projectName) {
     "BANKSTACK_API_URL",
     "CLI rendered dashboard health proxy",
   );
+  assertIncludes(
+    dashboardHealthProxy,
+    `@${projectName}/shared-utils`,
+    "CLI rendered dashboard health proxy",
+  );
 
   const apiApp = await readFile(
     join(targetDirectory, "apps", "api", "src", "app.ts"),
@@ -267,4 +277,20 @@ async function assertRenderedWorkspace(targetDirectory, projectName) {
   );
   assertIncludes(apiApp, 'app.get("/health"', "CLI rendered API app");
   assertIncludes(apiApp, '"/protected/*"', "CLI rendered API app");
+
+  const dashboardWrangler = await readFile(
+    join(targetDirectory, "apps", "dashboard", "wrangler.jsonc"),
+    "utf8",
+  );
+  assertIncludes(
+    dashboardWrangler,
+    `"service": "${projectName}-api"`,
+    "CLI rendered dashboard wrangler",
+  );
+
+  const sharedUtils = await readFile(
+    join(targetDirectory, "packages", "shared-utils", "src", "index.ts"),
+    "utf8",
+  );
+  assertIncludes(sharedUtils, "apiHealthSchema", "CLI rendered shared utils");
 }

@@ -1,0 +1,79 @@
+# {{PROJECT_NAME}} Setup Notes
+
+This file explains how to run and inspect the generated scaffold without rereading the Bankstack source repository.
+
+## Install
+
+Use pnpm only:
+
+```bash
+pnpm install
+```
+
+The generated `packageManager` and engine fields pin the expected pnpm and Node versions.
+
+## Verify Locally
+
+These commands should work before you create any Cloudflare or Supabase account:
+
+```bash
+pnpm check
+pnpm build
+pnpm test
+pnpm verify
+```
+
+`pnpm dev` starts the three app surfaces through Nx. If you prefer separate terminals, use:
+
+```bash
+pnpm --filter @{{PROJECT_NAME}}/api dev
+pnpm --filter @{{PROJECT_NAME}}/dashboard dev
+pnpm --filter @{{PROJECT_NAME}}/marketing dev
+```
+
+## Layout
+
+- `apps/marketing`: public Astro surface.
+- `apps/dashboard`: SvelteKit dashboard, Cloudflare-ready with `adapter-cloudflare`.
+- `apps/api`: Hono API, runnable locally with Node and shaped for Workers.
+- `packages/ui`: shared Tailwind v4 theme CSS and tiny primitives.
+- `packages/supabase`: shared Supabase env contracts and auth/RLS boundary notes.
+- `packages/shared-utils`: cross-app constants and Zod helpers.
+- `supabase/`: placeholder for future migrations after a real project exists.
+
+## Cloudflare Boundary
+
+`apps/dashboard/wrangler.jsonc` and `apps/api/wrangler.jsonc` are safe examples. They follow the current Cloudflare Wrangler JSONC shape and show the intended dashboard-to-API service binding:
+
+```jsonc
+"services": [
+  {
+    "binding": "API",
+    "service": "{{PROJECT_NAME}}-api"
+  }
+]
+```
+
+Cloudflare resources are not provisioned by the CLI. When you are ready to deploy, install dependencies, authenticate with Wrangler, replace names as needed, generate Worker types, and deploy intentionally.
+
+References:
+
+- https://developers.cloudflare.com/workers/wrangler/configuration/
+- https://developers.cloudflare.com/workers/runtime-apis/bindings/service-bindings/
+- https://svelte.dev/docs/kit/adapter-cloudflare
+
+## Supabase Boundary
+
+Supabase credentials are optional for local scaffold verification and required for real auth/data. Start from the `.env.example` files and replace placeholder values only after you create a Supabase project.
+
+Use browser-visible `PUBLIC_SUPABASE_*` values only for public URL and publishable key configuration. Keep JWT verification and any secret values on the server. For protected data, verify the user server-side and rely on row level security policies for exposed tables.
+
+References:
+
+- https://supabase.com/docs/guides/getting-started/api-keys
+- https://supabase.com/docs/guides/auth/server-side
+- https://supabase.com/docs/reference/javascript/auth-getuser
+
+## v0.1 Limits
+
+Bankstack v0.1 is scaffolding plus conventions. It intentionally does not include Python compute, product tables, background workers, deployment automation, or a complete Supabase Auth UI.

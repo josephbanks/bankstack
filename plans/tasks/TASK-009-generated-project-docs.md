@@ -2,7 +2,7 @@
 
 ## Status
 
-Todo
+Done
 
 ## Depends On
 
@@ -45,4 +45,4 @@ Generate a project and read the generated docs against the actual file tree. Run
 
 ## Handoff Notes
 
-TASK-010 and TASK-011 should use the documented commands as part of their test design where practical.
+Generated `README.md` and `SETUP.md` now describe pnpm-only usage, local verification commands, app/package layout, Cloudflare examples, Supabase boundaries, and v0.1 limits including the absence of Python compute. TASK-010 and TASK-011 should use the documented `pnpm check`, `pnpm build`, and generated-project install flow where practical.

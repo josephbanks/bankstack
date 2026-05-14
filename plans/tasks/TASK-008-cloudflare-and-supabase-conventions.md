@@ -2,7 +2,7 @@
 
 ## Status
 
-Todo
+Done
 
 ## Depends On
 
@@ -45,4 +45,4 @@ Generate a project, inspect generated config files, and run local build/check co
 
 ## Handoff Notes
 
-TASK-009 should explain external setup steps and local limitations clearly. TASK-011 should verify local-first behavior.
+Generated projects now include `wrangler.jsonc` examples for dashboard/API, service binding shape for dashboard-to-API (`API`), `.env.example` placeholders, an API Worker entrypoint, Supabase env contracts, and RLS/auth boundary placeholders. Current behavior was checked against Cloudflare Wrangler/service binding docs, SvelteKit `adapter-cloudflare` docs, and Supabase auth/API key docs on 2026-05-14.

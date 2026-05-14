@@ -2,7 +2,7 @@
 
 ## Status
 
-Todo
+Done
 
 ## Depends On
 
@@ -45,4 +45,4 @@ Generate a project and run package build/type-check commands as available. Inspe
 
 ## Handoff Notes
 
-Coordinate imports with TASK-006. If TASK-006 is already complete, update app templates only where necessary to consume the shared packages.
+Generated projects now include `packages/ui`, `packages/supabase`, and `packages/shared-utils`, with workspace imports wired into the Astro, SvelteKit, and Hono templates. `@supabase/supabase-js` is pinned to `2.105.1` because generated-project install verification reported that as the installable latest from the registry metadata available during this session.
