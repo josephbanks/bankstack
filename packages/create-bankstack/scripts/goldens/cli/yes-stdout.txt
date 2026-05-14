@@ -1,0 +1,16 @@
+create-bankstack
+version 0.1.0-alpha.0
+
+Resolved options:
+  Project name: my-bankstack-app
+  Target directory: my-bankstack-app
+  Install dependencies: yes
+  Initialize git: yes
+  Force non-empty directory: no
+
+Rendered workspace foundation with 48 files.
+
+Next steps:
+  cd my-bankstack-app
+  pnpm install
+  git init

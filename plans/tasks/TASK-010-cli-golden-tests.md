@@ -2,7 +2,7 @@
 
 ## Status
 
-Todo
+Done
 
 ## Depends On
 
@@ -46,3 +46,10 @@ Run the CLI package test command and any root test command added for this suite.
 ## Handoff Notes
 
 TASK-012 should wire these tests into CI. TASK-011 should complement these tests with install/build smoke coverage.
+
+Completed in this session:
+
+- Added `scripts/check-cli-golden.mjs` to the create-bankstack package test command.
+- Golden coverage now compares exact stdout for explicit `--no-install --no-git` and `--yes` non-interactive flows.
+- Golden coverage compares selected generated root/docs/app/package files for `golden-stack`, including project name interpolation and documented root commands.
+- Verification passed with `pnpm --filter create-bankstack test` and `pnpm run test`.
