@@ -3,6 +3,12 @@
 
 # Bankstack Agent Instructions
 
+## Implementation Hygiene
+
+The repository uses Git pre-commit and pre-push hooks. The pre-commit hook runs Prettier across the workspace before checking that the commit is functional, so broad formatting-only churn can appear after implementation. Treat that churn as expected, include it in the commit, and do not spend time fighting or reverting formatter-only changes unless the user explicitly asks.
+
+After completing an implementation change or plan-backed task, commit the finished work before handing off. Use a concise commit message that describes the completed change, and do not commit unrelated user changes unless they are required by the task or were created by the hook/formatter as part of the task.
+
 ## Planning Workflow
 
 Before implementing work from `plans/`, read `plans/README.md`, `plans/TRACKER.md`, and the matching file in `plans/tasks/`.
