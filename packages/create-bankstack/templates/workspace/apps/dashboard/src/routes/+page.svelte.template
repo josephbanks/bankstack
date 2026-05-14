@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { statusCardClassName } from "@{{PROJECT_NAME}}/ui";
+  import { supabaseAuthBoundary } from "@{{PROJECT_NAME}}/supabase/auth-boundary";
   import type { PageProps } from "./$types";
 
   let { data }: PageProps = $props();
@@ -34,17 +36,17 @@
     </p>
 
     <div class="status-grid">
-      <article class="status-card">
+      <article class={statusCardClassName}>
         <span class="label">API health</span>
         <strong class:online={data.health.ok}>{data.health.label}</strong>
         <p>{data.health.message}</p>
       </article>
-      <article class="status-card">
+      <article class={statusCardClassName}>
         <span class="label">Boundary</span>
-        <strong>Protected route stub</strong>
+        <strong>{supabaseAuthBoundary.name}</strong>
         <p>
-          API auth middleware responds at <code>/protected/profile</code> and is
-          ready for Supabase JWT verification in a later slice.
+          API auth middleware responds at <code>/protected/profile</code> and
+          is ready for Supabase JWT verification in a later slice.
         </p>
       </article>
     </div>

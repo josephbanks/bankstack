@@ -1,3 +1,5 @@
+import { apiHealthSchema } from "@{{PROJECT_NAME}}/shared-utils";
+import { env } from "$env/dynamic/private";
 import { json, type RequestHandler } from "@sveltejs/kit";
 
 type ApiHealth = {
@@ -14,7 +16,7 @@ const fallbackHealth = {
 
 export const GET: RequestHandler = async ({ fetch, platform }) => {
   const serviceBinding = platform?.env?.API;
-  const apiUrl = process.env.BANKSTACK_API_URL;
+  const apiUrl = env.BANKSTACK_API_URL;
 
   try {
     const response =
@@ -28,12 +30,18 @@ export const GET: RequestHandler = async ({ fetch, platform }) => {
       return json(fallbackHealth);
     }
 
-    const payload = (await response.json()) as ApiHealth;
+    const payload = apiHealthSchema.safeParse(
+      (await response.json()) as ApiHealth,
+    );
+
+    if (!payload.success) {
+      return json(fallbackHealth);
+    }
 
     return json({
-      ok: payload.ok === true,
-      label: payload.ok === true ? "API online" : "API responded",
-      message: `${payload.service ?? "Hono API"} responded through the dashboard health proxy.`,
+      ok: payload.data.ok === true,
+      label: payload.data.ok === true ? "API online" : "API responded",
+      message: `${payload.data.service ?? "Hono API"} responded through the dashboard health proxy.`,
     });
   } catch {
     return json(fallbackHealth);

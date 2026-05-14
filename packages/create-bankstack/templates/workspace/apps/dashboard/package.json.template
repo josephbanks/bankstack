@@ -9,13 +9,19 @@
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "preview": "vite preview --host 127.0.0.1 --port 5173"
   },
+  "dependencies": {
+    "@{{PROJECT_NAME}}/shared-utils": "workspace:*",
+    "@{{PROJECT_NAME}}/supabase": "workspace:*",
+    "@{{PROJECT_NAME}}/ui": "workspace:*"
+  },
   "devDependencies": {
-    "@sveltejs/adapter-auto": "{{DEV_DEPENDENCY_SVELTEJS_ADAPTER_AUTO}}",
+    "@sveltejs/adapter-cloudflare": "{{DEV_DEPENDENCY_SVELTEJS_ADAPTER_CLOUDFLARE}}",
     "@sveltejs/kit": "{{DEV_DEPENDENCY_SVELTEJS_KIT}}",
     "@sveltejs/vite-plugin-svelte": "{{DEV_DEPENDENCY_SVELTEJS_VITE_PLUGIN_SVELTE}}",
     "svelte": "{{DEV_DEPENDENCY_SVELTE}}",
     "svelte-check": "{{DEV_DEPENDENCY_SVELTE_CHECK}}",
     "typescript": "{{DEV_DEPENDENCY_TYPESCRIPT}}",
-    "vite": "{{DEV_DEPENDENCY_VITE}}"
+    "vite": "{{DEV_DEPENDENCY_VITE}}",
+    "wrangler": "{{DEV_DEPENDENCY_WRANGLER}}"
   }
 }

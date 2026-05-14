@@ -10,12 +10,15 @@
     "start": "node dist/server.js"
   },
   "dependencies": {
+    "@{{PROJECT_NAME}}/shared-utils": "workspace:*",
+    "@{{PROJECT_NAME}}/supabase": "workspace:*",
     "@hono/node-server": "{{DEPENDENCY_HONO_NODE_SERVER}}",
     "hono": "{{DEPENDENCY_HONO}}"
   },
   "devDependencies": {
     "@types/node": "{{DEV_DEPENDENCY_TYPES_NODE}}",
     "tsx": "{{DEV_DEPENDENCY_TSX}}",
-    "typescript": "{{DEV_DEPENDENCY_TYPESCRIPT}}"
+    "typescript": "{{DEV_DEPENDENCY_TYPESCRIPT}}",
+    "wrangler": "{{DEV_DEPENDENCY_WRANGLER}}"
   }
 }

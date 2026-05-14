@@ -1,0 +1,35 @@
+{
+  "name": "@{{PROJECT_NAME}}/supabase",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.json --noEmit",
+    "check": "tsc -p tsconfig.json --noEmit"
+  },
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "import": "./src/index.ts"
+    },
+    "./auth-boundary": {
+      "types": "./src/auth-boundary.ts",
+      "import": "./src/auth-boundary.ts"
+    },
+    "./client": {
+      "types": "./src/client.ts",
+      "import": "./src/client.ts"
+    },
+    "./env": {
+      "types": "./src/env.ts",
+      "import": "./src/env.ts"
+    }
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "{{DEPENDENCY_SUPABASE_SUPABASE_JS}}",
+    "zod": "{{DEPENDENCY_ZOD}}"
+  },
+  "devDependencies": {
+    "typescript": "{{DEV_DEPENDENCY_TYPESCRIPT}}"
+  }
+}

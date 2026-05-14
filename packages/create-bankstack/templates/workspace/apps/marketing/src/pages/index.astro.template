@@ -1,5 +1,12 @@
 ---
+import {
+  BANKSTACK_STACK_LABEL,
+  describeLocalStack,
+} from "@{{PROJECT_NAME}}/shared-utils";
+import { primaryActionClassName } from "@{{PROJECT_NAME}}/ui";
+
 const projectName = "{{PROJECT_NAME}}";
+const stackSummary = describeLocalStack(projectName);
 ---
 
 <html lang="en">
@@ -14,13 +21,14 @@ const projectName = "{{PROJECT_NAME}}";
   </head>
   <body>
     <main>
-      <p class="eyebrow">Astro marketing</p>
+      <p class="eyebrow">{BANKSTACK_STACK_LABEL}</p>
       <h1>{projectName} ships on a split stack.</h1>
       <p class="lede">
-        A static public surface, a reactive dashboard, and a fast Hono API are
-        generated together so each boundary is visible from the first commit.
+        {stackSummary}
       </p>
-      <a href="http://localhost:5173">Open dashboard</a>
+      <a class={primaryActionClassName} href="http://localhost:5173"
+        >Open dashboard</a
+      >
     </main>
   </body>
 </html>

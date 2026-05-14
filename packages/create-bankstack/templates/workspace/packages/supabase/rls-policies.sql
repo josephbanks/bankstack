@@ -1,0 +1,15 @@
+-- Bankstack RLS placeholder.
+--
+-- Do not create product tables from this file as-is. Use it as a reminder that
+-- every table in an exposed schema needs row level security before browser or
+-- API clients rely on Supabase data.
+--
+-- Example shape for a future product table:
+--
+-- alter table public.example_table enable row level security;
+--
+-- create policy "Users can read their own rows"
+-- on public.example_table
+-- for select
+-- to authenticated
+-- using ((select auth.uid()) is not null and (select auth.uid()) = user_id);

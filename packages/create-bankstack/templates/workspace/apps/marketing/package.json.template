@@ -10,6 +10,8 @@
     "preview": "astro preview --host 127.0.0.1 --port 4321"
   },
   "dependencies": {
+    "@{{PROJECT_NAME}}/shared-utils": "workspace:*",
+    "@{{PROJECT_NAME}}/ui": "workspace:*",
     "astro": "{{DEPENDENCY_ASTRO}}"
   },
   "devDependencies": {
