@@ -22,3 +22,8 @@ Variable names must match `^[A-Z][A-Z0-9_]*$`. File and directory names may also
 ## Exact Dependency Versions
 
 Generated dependency versions must come from `versions.json` in this directory. Template files should use variables or metadata derived from that file rather than loose ranges such as `^` or `~`.
+
+## Template Sets
+
+- `workspace` is the generated project root: pnpm workspace metadata, Nx defaults, TypeScript defaults, root scripts, and local-only ignore rules.
+- `placeholder` is kept as a tiny renderer fixture for binary copy and filename interpolation checks.

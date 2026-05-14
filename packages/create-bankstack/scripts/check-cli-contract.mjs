@@ -8,6 +8,10 @@ import { spawnSync } from "node:child_process";
 
 const root = fileURLToPath(new URL("..", import.meta.url));
 const cliPath = join(root, "dist", "index.js");
+const versions = JSON.parse(
+  await readFile(join(root, "templates", "versions.json"), "utf8"),
+);
+const pnpmVersion = versions.packageManager.replace(/^pnpm@/, "");
 const tempRoot = join(tmpdir(), `create-bankstack-contract-${process.pid}`);
 
 function run(args, options = {}) {
@@ -51,10 +55,10 @@ try {
   assertIncludes(result.stdout, "Install dependencies: no", "--yes stdout");
   assertIncludes(
     result.stdout,
-    "Rendered placeholder template with 4 files.",
+    "Rendered workspace foundation with 7 files.",
     "--yes stdout",
   );
-  await assertRenderedPlaceholder(
+  await assertRenderedWorkspace(
     join(tempRoot, "my-bankstack-app"),
     "my-bankstack-app",
   );
@@ -71,10 +75,10 @@ try {
   );
   assertIncludes(
     result.stdout,
-    "TASK-005 will replace this placeholder",
+    "Rendered workspace foundation with 7 files.",
     "explicit flags stdout",
   );
-  await assertRenderedPlaceholder(join(tempRoot, "sample-app"), "sample-app");
+  await assertRenderedWorkspace(join(tempRoot, "sample-app"), "sample-app");
 
   result = run(["--help"]);
   assertExit(result, 0, "--help");
@@ -162,33 +166,64 @@ try {
   await rm(tempRoot, { force: true, recursive: true });
 }
 
-async function assertRenderedPlaceholder(targetDirectory, projectName) {
+async function assertRenderedWorkspace(targetDirectory, projectName) {
   const readme = await readFile(join(targetDirectory, "README.md"), "utf8");
   assertIncludes(readme, `# ${projectName}`, "CLI rendered README");
+  assertIncludes(readme, "does not create an app", "CLI rendered README");
 
-  const manifest = await readFile(
-    join(targetDirectory, ".bankstack-template.json"),
-    "utf8",
-  );
-  assertIncludes(manifest, '"name": "placeholder"', "CLI rendered manifest");
-
-  const marker = await readFile(
-    join(targetDirectory, "assets", "marker.bin"),
+  const packageJson = await readFile(
+    join(targetDirectory, "package.json"),
     "utf8",
   );
   assertIncludes(
-    marker,
-    "BANKSTACK_PLACEHOLDER_BINARY_MARKER",
-    "CLI rendered marker",
+    packageJson,
+    `"name": "${projectName}"`,
+    "CLI rendered package",
   );
+  assertIncludes(
+    packageJson,
+    `"packageManager": "${versions.packageManager}"`,
+    "CLI rendered package",
+  );
+  assertIncludes(
+    packageJson,
+    `"pnpm": "${pnpmVersion}"`,
+    "CLI rendered package",
+  );
+  assertIncludes(
+    packageJson,
+    `"nx": "${versions.devDependencies.nx}"`,
+    "CLI rendered package",
+  );
+  assertIncludes(packageJson, '"verify": "pnpm ', "CLI rendered package");
 
-  const projectMarker = await readFile(
-    join(targetDirectory, `${projectName}.txt`),
+  const workspace = await readFile(
+    join(targetDirectory, "pnpm-workspace.yaml"),
+    "utf8",
+  );
+  assertIncludes(workspace, '- "apps/*"', "CLI rendered workspace");
+  assertIncludes(workspace, '- "packages/*"', "CLI rendered workspace");
+
+  const nxJson = await readFile(join(targetDirectory, "nx.json"), "utf8");
+  assertIncludes(nxJson, '"namedInputs"', "CLI rendered nx.json");
+
+  const tsconfig = await readFile(
+    join(targetDirectory, "tsconfig.base.json"),
+    "utf8",
+  );
+  assertIncludes(tsconfig, '"module": "NodeNext"', "CLI rendered tsconfig");
+
+  const gitignore = await readFile(join(targetDirectory, ".gitignore"), "utf8");
+  assertIncludes(gitignore, ".svelte-kit/", "CLI rendered .gitignore");
+  assertIncludes(gitignore, "supabase/.temp/", "CLI rendered .gitignore");
+
+  const prettierIgnore = await readFile(
+    join(targetDirectory, ".prettierignore"),
     "utf8",
   );
   assertIncludes(
-    projectMarker,
-    `Rendered marker for ${projectName}.`,
-    "CLI rendered filename interpolation marker",
+    prettierIgnore,
+    "pnpm-lock.yaml",
+    "CLI rendered .prettierignore",
   );
 }

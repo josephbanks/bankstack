@@ -6,6 +6,10 @@ import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = fileURLToPath(new URL("..", import.meta.url));
+const versions = JSON.parse(
+  await readFile(join(root, "templates", "versions.json"), "utf8"),
+);
+const pnpmVersion = versions.packageManager.replace(/^pnpm@/, "");
 const tempRoot = await mkdtemp(join(tmpdir(), "create-bankstack-render-"));
 
 function assertIncludes(value, expected, label) {
@@ -16,6 +20,19 @@ function assertIncludes(value, expected, label) {
   }
 }
 
+function workspaceVariables(projectName) {
+  return {
+    DEV_DEPENDENCY_NX: versions.devDependencies.nx,
+    DEV_DEPENDENCY_PRETTIER: versions.devDependencies.prettier,
+    DEV_DEPENDENCY_TYPES_NODE: versions.devDependencies["@types/node"],
+    DEV_DEPENDENCY_TYPESCRIPT: versions.devDependencies.typescript,
+    NODE_ENGINE: versions.node,
+    PACKAGE_MANAGER: versions.packageManager,
+    PNPM_ENGINE: pnpmVersion,
+    PROJECT_NAME: projectName,
+  };
+}
+
 try {
   const { renderTemplate } = await import(
     join(root, "dist", "render-template.js")
@@ -23,34 +40,72 @@ try {
   const targetDirectory = join(tempRoot, "rendered-app");
   const renderedFiles = await renderTemplate({
     targetDirectory,
-    templateName: "placeholder",
-    variables: {
-      PROJECT_NAME: "rendered-app",
-    },
+    templateName: "workspace",
+    variables: workspaceVariables("rendered-app"),
   });
 
-  if (renderedFiles.length !== 4) {
+  if (renderedFiles.length !== 7) {
     throw new Error(
-      `Expected 4 rendered files, received ${renderedFiles.length}.`,
+      `Expected 7 rendered files, received ${renderedFiles.length}.`,
     );
   }
 
   const readme = await readFile(join(targetDirectory, "README.md"), "utf8");
   assertIncludes(readme, "# rendered-app", "rendered README");
-  assertIncludes(
-    readme,
-    "TASK-005 replaces this placeholder",
-    "rendered README",
-  );
+  assertIncludes(readme, "does not create an app", "rendered README");
 
-  const manifest = await readFile(
-    join(targetDirectory, ".bankstack-template.json"),
+  const packageJson = await readFile(
+    join(targetDirectory, "package.json"),
     "utf8",
   );
-  assertIncludes(manifest, '"name": "placeholder"', "copied manifest");
+  assertIncludes(packageJson, '"name": "rendered-app"', "rendered package");
+  assertIncludes(
+    packageJson,
+    `"packageManager": "${versions.packageManager}"`,
+    "rendered package",
+  );
+  assertIncludes(
+    packageJson,
+    `"nx": "${versions.devDependencies.nx}"`,
+    "rendered package",
+  );
+
+  const workspace = await readFile(
+    join(targetDirectory, "pnpm-workspace.yaml"),
+    "utf8",
+  );
+  assertIncludes(workspace, '- "apps/*"', "rendered pnpm workspace");
+  assertIncludes(workspace, '- "packages/*"', "rendered pnpm workspace");
+
+  const nxJson = await readFile(join(targetDirectory, "nx.json"), "utf8");
+  assertIncludes(nxJson, '"targetDefaults"', "rendered nx.json");
+
+  const gitignore = await readFile(join(targetDirectory, ".gitignore"), "utf8");
+  assertIncludes(gitignore, "node_modules/", "rendered .gitignore");
+
+  const prettierIgnore = await readFile(
+    join(targetDirectory, ".prettierignore"),
+    "utf8",
+  );
+  assertIncludes(prettierIgnore, "pnpm-lock.yaml", "rendered .prettierignore");
+
+  const placeholderTarget = join(tempRoot, "placeholder-app");
+  const placeholderFiles = await renderTemplate({
+    targetDirectory: placeholderTarget,
+    templateName: "placeholder",
+    variables: {
+      PROJECT_NAME: "placeholder-app",
+    },
+  });
+
+  if (placeholderFiles.length !== 4) {
+    throw new Error(
+      `Expected 4 placeholder files, received ${placeholderFiles.length}.`,
+    );
+  }
 
   const marker = await readFile(
-    join(targetDirectory, "assets", "marker.bin"),
+    join(placeholderTarget, "assets", "marker.bin"),
     "utf8",
   );
   assertIncludes(
@@ -60,12 +115,12 @@ try {
   );
 
   const projectMarker = await readFile(
-    join(targetDirectory, "rendered-app.txt"),
+    join(placeholderTarget, "placeholder-app.txt"),
     "utf8",
   );
   assertIncludes(
     projectMarker,
-    "Rendered marker for rendered-app.",
+    "Rendered marker for placeholder-app.",
     "rendered filename interpolation marker",
   );
 
@@ -73,7 +128,7 @@ try {
     join(root, "templates", "placeholder", "assets", "marker.bin"),
   );
   const copiedMarker = await readFile(
-    join(targetDirectory, "assets", "marker.bin"),
+    join(placeholderTarget, "assets", "marker.bin"),
   );
 
   if (!sourceMarker.equals(copiedMarker)) {
@@ -84,10 +139,8 @@ try {
     () =>
       renderTemplate({
         targetDirectory: join(tempRoot, "escape-template"),
-        templateName: "../placeholder",
-        variables: {
-          PROJECT_NAME: "escape-template",
-        },
+        templateName: "../workspace",
+        variables: workspaceVariables("escape-template"),
       }),
     "Template path escapes its root",
     "template root escape",

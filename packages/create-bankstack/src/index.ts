@@ -69,22 +69,19 @@ function printRenderSummary(
 
   console.log("");
   console.log(
-    `Rendered placeholder template with ${renderedFiles.length} files.`,
-  );
-  console.log(
-    "TASK-005 will replace this placeholder with the generated workspace foundation.",
+    `Rendered workspace foundation with ${renderedFiles.length} files.`,
   );
   console.log("");
   console.log("Next steps:");
   console.log(`  cd ${directory}`);
   console.log(
     options.installDependencies
-      ? "  pnpm install will run automatically after generation."
+      ? "  pnpm install"
       : "  Dependency installation was skipped; run pnpm install when ready.",
   );
   console.log(
     options.initializeGit
-      ? "  git init will run automatically after generation."
+      ? "  git init"
       : "  Git initialization was skipped; run git init if desired.",
   );
 }
@@ -105,7 +102,7 @@ async function main(args: string[]): Promise<void> {
   const options = await resolveOptions(parsed);
   const renderedFiles = await renderTemplate({
     targetDirectory: options.targetDirectory,
-    templateName: "placeholder",
+    templateName: "workspace",
     variables: variablesForOptions(options),
   });
 
