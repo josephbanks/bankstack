@@ -40,7 +40,7 @@ Tooling choices recorded for follow-on tasks:
 
 - pnpm is pinned through `packageManager` as `pnpm@10.33.2`, matching the local toolchain used to generate `pnpm-lock.yaml`.
 - Nx is pinned as an exact dev dependency at `nx@22.7.1`.
-- The root Node engine floor is `>=22.0.0`, leaving room for current LTS/runtime versions while avoiding older Node baselines for a new CLI.
+- The root Node engine floor started at `>=22.0.0` in TASK-001 and was raised to `>=22.4.0` in TASK-003 once the CLI adopted Node's built-in negative boolean argument parsing for `--no-install` and `--no-git`.
 
 Primary/current sources checked:
 

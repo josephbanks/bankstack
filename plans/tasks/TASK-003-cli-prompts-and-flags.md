@@ -1,7 +1,7 @@
 # TASK-003: CLI Prompts And Flags
 
 ## Status
-Todo
+Done
 
 ## Depends On
 TASK-002
@@ -35,3 +35,18 @@ Run local CLI invocations covering interactive defaults where feasible and non-i
 
 ## Handoff Notes
 TASK-010 will add durable test coverage for this command contract. Keep option parsing isolated so the template renderer can consume it cleanly.
+
+Implementation notes:
+
+- The CLI uses Node core `util.parseArgs` and `readline/promises` instead of adding a prompt/parser dependency.
+- `--no-install` and `--no-git` are parsed through Node's negative boolean option support, so the root and package Node engine floors were raised to `>=22.4.0`.
+- The resolved option shape includes `projectName`, `targetDirectory`, `installDependencies`, `initializeGit`, `force`, `yes`, and `interactive` for the template renderer to consume later.
+- Guarded target validation rejects invalid project names, existing non-directory targets, and non-empty directories unless `--force` is provided.
+- Guarded target validation now only accepts simple child directory names under the current working directory and rejects `.`, `..`, nested paths, absolute paths, unsafe names, and existing symlink targets.
+- Nx `test` now depends on `build`, so CLI contract checks rebuild `dist` on clean checkouts before executing the compiled binary.
+- Verification covered `pnpm run check`, `pnpm run build`, `pnpm run test` from a removed `packages/create-bankstack/dist`, `node packages/create-bankstack/dist/index.js --yes`, explicit `--no-install --no-git`, invalid project names, unsafe directory inputs, non-empty directory failure, `--force` success, symlink rejection, `--help`, and a TTY prompt pass using defaults.
+
+Primary/current sources checked:
+
+- Node.js `util.parseArgs` docs: https://nodejs.org/api/util.html#utilparseargsconfig
+- Node.js `readline/promises` docs: https://nodejs.org/api/readline.html#promises-api

@@ -44,7 +44,7 @@ TASK-000
 | ID | Task | Status | Depends On | Blocks | Owner/Session | Acceptance Summary |
 | --- | --- | --- | --- | --- | --- | --- |
 | TASK-002 | [CLI Package Shell](tasks/TASK-002-cli-package-shell.md) | Done | TASK-001 | TASK-003, TASK-004 | Codex implementation session | `packages/create-bankstack` exists with buildable TypeScript package metadata and a binary entrypoint stub. |
-| TASK-003 | [CLI Prompts And Flags](tasks/TASK-003-cli-prompts-and-flags.md) | Todo | TASK-002 | TASK-010 | Unassigned; unblocked by TASK-002 | CLI accepts the MVP prompts and automation flags without generating the final workspace yet. |
+| TASK-003 | [CLI Prompts And Flags](tasks/TASK-003-cli-prompts-and-flags.md) | Done | TASK-002 | TASK-010 | Codex implementation session | CLI accepts the MVP prompts and automation flags without generating the final workspace yet. |
 | TASK-004 | [Template Rendering Engine](tasks/TASK-004-template-rendering-engine.md) | Todo | TASK-002 | TASK-005 | Unassigned; unblocked by TASK-002 | CLI has a template-first copy/render engine and exact dependency version policy. |
 
 ## Phase 3: Core Templates
