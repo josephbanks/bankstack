@@ -32,6 +32,8 @@ Do not configure npm token publishing, automated releases, Cloudflare deployment
 
 Use pnpm in CI. Keep the workflow readable and close to local commands. If smoke tests are expensive, keep them in the workflow but structure the job so failures are easy to diagnose.
 
+TASK-011 added the local generated-project smoke command as `pnpm smoke:generated`. In CI, run the faster CLI package tests first, then run `pnpm smoke:generated` in a separate step so generated install/check/build failures are isolated in the logs. The smoke test installs dependencies from the npm registry in a temporary generated project, so the CI job needs normal outbound registry access but no Cloudflare, Supabase, or publishing secrets.
+
 ## Acceptance Criteria
 
 - CI installs dependencies with pnpm.
@@ -46,3 +48,9 @@ Run the same commands locally. If possible, inspect workflow syntax with availab
 ## Handoff Notes
 
 TASK-013 depends on CI being green, but actual npm publishing remains manual for the alpha.
+
+Suggested local command sequence before committing TASK-012:
+
+- `pnpm install --frozen-lockfile`
+- `pnpm --filter create-bankstack test`
+- `pnpm smoke:generated`

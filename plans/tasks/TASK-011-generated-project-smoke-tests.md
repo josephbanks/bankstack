@@ -2,7 +2,7 @@
 
 ## Status
 
-Todo
+Done
 
 ## Depends On
 
@@ -45,4 +45,21 @@ Run the smoke test locally from a clean state. Confirm it fails meaningfully if 
 
 ## Handoff Notes
 
-TASK-012 should run this smoke test in CI after golden tests pass.
+Implemented `pnpm smoke:generated`, which delegates to `packages/create-bankstack` and runs `tsc -p tsconfig.json && node scripts/smoke-generated-project.mjs`.
+
+The smoke script builds the CLI, generates a temp `smoke-stack` project with `--no-install --no-git`, then runs these generated-project commands:
+
+- `pnpm install --no-frozen-lockfile --reporter=append-only`
+- `pnpm format:check`
+- `pnpm check`
+- `pnpm build`
+- `pnpm test`
+
+Verification completed locally on 2026-05-14:
+
+- `pnpm --filter create-bankstack test`
+- `pnpm smoke:generated`
+
+The generated install needs npm registry access and took about 30 seconds once dependencies were reachable from the pnpm store. The script cleans up its temp directory by default; set `BANKSTACK_KEEP_SMOKE_TEMP=1` when debugging a generated project failure.
+
+TASK-012 should run `pnpm --filter create-bankstack test` before `pnpm smoke:generated` so golden failures stay quick and easy to diagnose.

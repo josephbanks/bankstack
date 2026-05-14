@@ -62,7 +62,7 @@ TASK-000
 | ID       | Task                                                                             | Status | Depends On                             | Blocks   | Owner/Session                | Acceptance Summary                                                        |
 | -------- | -------------------------------------------------------------------------------- | ------ | -------------------------------------- | -------- | ---------------------------- | ------------------------------------------------------------------------- |
 | TASK-010 | [CLI Golden Tests](tasks/TASK-010-cli-golden-tests.md)                           | Done   | TASK-003, TASK-009                     | TASK-012 | Codex implementation session | CLI rendering is covered by stable golden/snapshot tests.                 |
-| TASK-011 | [Generated Project Smoke Tests](tasks/TASK-011-generated-project-smoke-tests.md) | Todo   | TASK-006, TASK-007, TASK-008, TASK-009 | TASK-012 | Unassigned                   | A temp generated project can install and pass build/check smoke tests.    |
+| TASK-011 | [Generated Project Smoke Tests](tasks/TASK-011-generated-project-smoke-tests.md) | Done   | TASK-006, TASK-007, TASK-008, TASK-009 | TASK-012 | Codex implementation session | A temp generated project can install and pass build/check smoke tests.    |
 | TASK-012 | [CI Checks](tasks/TASK-012-ci-checks.md)                                         | Todo   | TASK-010, TASK-011                     | TASK-013 | Unassigned                   | GitHub Actions run install, CLI tests, and generated-project smoke tests. |
 
 ## Phase 5: Alpha Publish

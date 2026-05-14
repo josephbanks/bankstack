@@ -14,7 +14,8 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "check": "tsc -p tsconfig.json --noEmit",
-    "test": "tsc -p tsconfig.json && node scripts/check-cli-contract.mjs && node scripts/check-render-template.mjs && node scripts/check-cli-golden.mjs"
+    "test": "tsc -p tsconfig.json && node scripts/check-cli-contract.mjs && node scripts/check-render-template.mjs && node scripts/check-cli-golden.mjs",
+    "smoke:generated": "tsc -p tsconfig.json && node scripts/smoke-generated-project.mjs"
   },
   "engines": {
     "node": ">=22.12.0"

@@ -17,6 +17,7 @@
     "check": "nx run-many -t check",
     "build": "nx run-many -t build",
     "test": "nx run-many -t test",
+    "smoke:generated": "pnpm --filter create-bankstack smoke:generated",
     "verify:functional": "pnpm check && pnpm build && pnpm test",
     "verify:commit": "pnpm format && pnpm verify:functional",
     "verify:push": "pnpm format:check && pnpm verify:functional"
