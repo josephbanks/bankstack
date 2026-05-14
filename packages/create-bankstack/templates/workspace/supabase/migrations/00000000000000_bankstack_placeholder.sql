@@ -1,0 +1,4 @@
+-- Placeholder migration for a new Bankstack workspace.
+--
+-- This file intentionally creates no tables. Add product migrations after you
+-- connect a Supabase project and decide which data belongs behind RLS.

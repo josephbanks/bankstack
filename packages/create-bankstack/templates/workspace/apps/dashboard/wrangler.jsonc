@@ -1,0 +1,20 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "{{PROJECT_NAME}}-dashboard",
+  "main": ".svelte-kit/cloudflare/_worker.js",
+  "compatibility_date": "2026-05-14",
+  "compatibility_flags": ["nodejs_als"],
+  "assets": {
+    "binding": "ASSETS",
+    "directory": ".svelte-kit/cloudflare",
+  },
+  "services": [
+    {
+      "binding": "API",
+      "service": "{{PROJECT_NAME}}-api",
+    },
+  ],
+  "vars": {
+    "BANKSTACK_ENV": "local",
+  },
+}
