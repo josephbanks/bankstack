@@ -2,7 +2,9 @@
 
 ## Vision
 
-Bankstack is **scaffolding plus conventions** for the stack described in this repository: an opinionated Nx monorepo aimed at a 2026 **Cloudflare edge + Supabase** split (fast TypeScript at the edge, optional async compute, shared auth and RLS). It is not a new framework; it encodes architecture, boundaries, and setup so teams can start from a known-good shape instead of wiring generators by hand.
+Bankstack is **scaffolding plus conventions** for the stack described in this repository: an opinionated Nx monorepo aimed at edge-native modern applications, especially a 2026 **Cloudflare edge + Supabase** split (fast TypeScript at the edge, optional async compute, shared auth and RLS). It is not a new framework; it encodes architecture, boundaries, and setup so teams can start from a known-good shape instead of wiring generators by hand.
+
+Despite the name, Bankstack is not banking software and is not affiliated with banks or financial institutions. The name is a play on maintainer Joseph Banks' last name.
 
 The product center is a **published Node CLI** (under `packages/create-bankstack`), installable with npm or pnpm, comparable in spirit to running something like [`npx @tanstack/cli create …`](https://tanstack.com/cli/latest/docs/installation) for TanStack: you run a `create` command from the registry, answer prompts (or use flags), and get a repo that already matches the documented stack and tasks.
 

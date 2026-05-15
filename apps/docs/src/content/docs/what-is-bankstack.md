@@ -1,10 +1,12 @@
 ---
 title: What Bankstack Is
-description: Bankstack is scaffolding plus conventions for Cloudflare edge and Supabase split-stack monorepos.
+description: Bankstack is scaffolding plus conventions for edge-native modern applications.
 order: 1
 ---
 
-Bankstack is not a framework. It is an opinionated starting point for a pnpm-only Nx monorepo where fast TypeScript runs at the Cloudflare edge and Supabase owns identity, data access, and row level security.
+Bankstack is not a framework, and despite the name, it is not banking software. The name is a play on maintainer Joseph Banks' last name; Bankstack is not affiliated with banks or financial institutions.
+
+It is an opinionated starting point for edge-native modern applications, including SaaS apps: a pnpm-only Nx monorepo where fast TypeScript runs at the Cloudflare edge and Supabase owns identity, data access, and row level security.
 
 The alpha centers on `create-bankstack`, a published Node CLI that generates a workspace shaped like the source docs and templates in this repository. The generated project is meant to be inspectable: you can install it, run checks, build it, and decide where to connect real Cloudflare and Supabase resources.
 

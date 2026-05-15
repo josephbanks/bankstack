@@ -1,6 +1,8 @@
 # create-bankstack
 
-`create-bankstack` scaffolds a SaaS-ready Bankstack workspace: a pnpm-only Nx monorepo with Cloudflare edge app examples, Supabase boundary placeholders, and shared packages.
+`create-bankstack` scaffolds a Bankstack workspace for edge-native modern applications: a pnpm-only Nx monorepo with Cloudflare edge app examples, Supabase boundary placeholders, and shared packages.
+
+Bankstack is not banking software and is not affiliated with banks or financial institutions. The name is a play on maintainer Joseph Banks' last name.
 
 This package is currently alpha software. The generated project is intended to be inspectable and useful as a starting point, but it does not create cloud resources, provision Supabase, configure production secrets, or deploy anything automatically.
 
@@ -51,6 +53,7 @@ Read the generated `README.md` and `SETUP.md` before connecting real Cloudflare 
 - Docs: https://bankstack.dev/docs/alpha-cli
 - Source: https://github.com/josephbanks/bankstack/tree/main/packages/create-bankstack
 - Issues: https://github.com/josephbanks/bankstack/issues
+- Maintainer: https://www.automatapartners.com/
 
 ## Alpha Notes
 
