@@ -28,14 +28,16 @@ TASK-021
   -> TASK-023
 TASK-022
   -> TASK-023
+  -> TASK-024
 ```
 
 ## Phase 8: Distribution Polish
 
-| ID       | Task                                                                                           | Status | Depends On         | Blocks   | Owner/Session | Acceptance Summary                                                                                                 |
-| -------- | ---------------------------------------------------------------------------------------------- | ------ | ------------------ | -------- | ------------- | ------------------------------------------------------------------------------------------------------------------ |
-| TASK-019 | [Source Docs Cleanup](tasks/TASK-019-source-docs-cleanup.md)                                   | Todo   | None               | TASK-022 | Unassigned    | Legacy source docs clearly point to the CLI-era path or are archived so they no longer confuse users.              |
-| TASK-020 | [Skill Packaging And Install Guidance](tasks/TASK-020-skill-packaging-and-install-guidance.md) | Todo   | None               | TASK-022 | Unassigned    | The Bankstack expert skill has local/repo install guidance and minimal metadata without publishing automation.     |
-| TASK-021 | [Alpha Release Cadence](tasks/TASK-021-alpha-release-cadence.md)                               | Todo   | None               | TASK-023 | Unassigned    | Release notes/checklists reflect the current alpha state, dist-tag reality, and next promotion path.               |
-| TASK-022 | [Public Docs Distribution Page](tasks/TASK-022-public-docs-distribution-page.md)               | Todo   | TASK-019, TASK-020 | TASK-023 | Unassigned    | Public docs explain CLI install, skill usage, current limits, and feedback paths from one distribution entrypoint. |
-| TASK-023 | [Feedback And Dogfood Loop](tasks/TASK-023-feedback-and-dogfood-loop.md)                       | Todo   | TASK-021, TASK-022 | None     | Unassigned    | A lightweight loop exists for generated-project checks, user feedback capture, and template/docs drift follow-up.  |
+| ID       | Task                                                                                           | Status | Depends On         | Blocks   | Owner/Session | Acceptance Summary                                                                                                        |
+| -------- | ---------------------------------------------------------------------------------------------- | ------ | ------------------ | -------- | ------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| TASK-019 | [Source Docs Cleanup](tasks/TASK-019-source-docs-cleanup.md)                                   | Todo   | None               | TASK-022 | Unassigned    | Legacy source docs clearly point to the CLI-era path or are archived so they no longer confuse users.                     |
+| TASK-020 | [Skill Packaging And Install Guidance](tasks/TASK-020-skill-packaging-and-install-guidance.md) | Todo   | None               | TASK-022 | Unassigned    | The Bankstack expert skill has local/repo install guidance and minimal metadata without publishing automation.            |
+| TASK-021 | [Alpha Release Cadence](tasks/TASK-021-alpha-release-cadence.md)                               | Todo   | None               | TASK-023 | Unassigned    | Release notes/checklists reflect the current alpha state, dist-tag reality, and next promotion path.                      |
+| TASK-022 | [Public Docs Distribution Page](tasks/TASK-022-public-docs-distribution-page.md)               | Todo   | TASK-019, TASK-020 | TASK-023 | Unassigned    | Public docs explain CLI install, skill usage, current limits, and feedback paths from one distribution entrypoint.        |
+| TASK-023 | [Feedback And Dogfood Loop](tasks/TASK-023-feedback-and-dogfood-loop.md)                       | Todo   | TASK-021, TASK-022 | None     | Unassigned    | A lightweight loop exists for generated-project checks, user feedback capture, and template/docs drift follow-up.         |
+| TASK-024 | [Generated Provider AI Tooling](tasks/TASK-024-generated-provider-ai-tooling.md)               | Todo   | TASK-022           | None     | Unassigned    | Generated projects can optionally include provider-maintained AI skills/MCP guidance without losing local-first defaults. |

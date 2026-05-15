@@ -8,6 +8,8 @@ Despite the name, Bankstack is not banking software and is not affiliated with b
 
 The product center is a **published Node CLI** (under `packages/create-bankstack`), installable with npm or pnpm, comparable in spirit to running something like [`npx @tanstack/cli create …`](https://tanstack.com/cli/latest/docs/installation) for TanStack: you run a `create` command from the registry, answer prompts (or use flags), and get a repo that already matches the documented stack and tasks.
 
+As AI coding agents become part of the normal development loop, generated workspaces should also help agents reach current provider guidance without bloating Bankstack itself. Over time, the CLI should offer opt-in setup or guidance for provider-maintained AI skills and MCP servers for the stack, such as Supabase skills/MCP, Cloudflare skills/docs-for-agents, Astro Docs MCP, and Svelte MCP. This should be explicit and local-first: generated projects should not silently run authenticated MCP setup, create provider resources, or force a specific AI tool.
+
 This **bankstack** repository is also the **canonical dogfood**: the public site and docs (for example an Astro app under `apps/docs` for bankstack.dev) should be built with the same stack the CLI scaffolds, alongside the CLI package and agent skills. That keeps documentation, examples, and templates aligned.
 
 ## How the docs fit together
@@ -21,7 +23,7 @@ This **bankstack** repository is also the **canonical dogfood**: the public site
 ## Delivery surfaces
 
 1. **`packages/create-bankstack` (npm / pnpm)**  
-   The code published to npm. The planned experience is: run something like `pnpm dlx create-bankstack@latest` or `npx create-bankstack@latest` (exact package and binary names follow whatever you publish) to generate a new workspace that reflects [ARCHITECTURE_OVERVIEW.md](ARCHITECTURE_OVERVIEW.md) and [SETUP_GUIDE.md](SETUP_GUIDE.md).
+   The code published to npm. The planned experience is: run something like `pnpm dlx create-bankstack@latest` or `npx create-bankstack@latest` (exact package and binary names follow whatever you publish) to generate a new workspace that reflects [ARCHITECTURE_OVERVIEW.md](ARCHITECTURE_OVERVIEW.md) and [SETUP_GUIDE.md](SETUP_GUIDE.md). Future template work should make provider AI tooling an explicit choice, so teams can opt into maintained skills/MCP guidance for Cloudflare, Supabase, Astro, Svelte, and related stack pieces without changing the default local-first scaffold.
 
 2. **`apps/*` (example and docs)**  
    Applications in this repo demonstrate the stack in production use. A docs or marketing app proves the same adapters, bindings, and patterns consumers get from the CLI.
