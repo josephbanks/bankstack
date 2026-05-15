@@ -7,14 +7,17 @@
     "dev": "astro dev --host 127.0.0.1",
     "check": "astro check",
     "build": "astro check && astro build",
-    "preview": "astro preview --host 127.0.0.1"
+    "preview": "astro preview --host 127.0.0.1",
+    "deploy:dry-run": "wrangler deploy --dry-run",
+    "dogfood:verify": "node scripts/verify-dogfood.mjs"
   },
   "dependencies": {
     "astro": "6.3.3"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.9",
-    "typescript": "6.0.3"
+    "typescript": "6.0.3",
+    "wrangler": "4.91.0"
   },
   "engines": {
     "node": ">=22.12.0",

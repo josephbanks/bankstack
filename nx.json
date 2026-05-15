@@ -14,7 +14,11 @@
     "build": {
       "cache": true,
       "inputs": ["default", "^default"],
-      "outputs": ["{projectRoot}/dist", "{projectRoot}/build"]
+      "outputs": [
+        "{projectRoot}/dist",
+        "{projectRoot}/build",
+        "{projectRoot}/.astro"
+      ]
     },
     "check": {
       "cache": true,

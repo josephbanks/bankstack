@@ -2,7 +2,7 @@
 
 ## Status
 
-Todo
+Done
 
 ## Depends On
 
@@ -47,6 +47,24 @@ Record any required Cloudflare dashboard steps as manual setup notes unless this
 Run the docs app check and build commands. Run a local static or Wrangler preview if configuration allows it without credentials. Review tracker dependencies to confirm `TASK-015` depends on this task.
 
 ## Handoff Notes
+
+Completed static Cloudflare Workers deployment readiness for `apps/docs` with `wrangler.jsonc`, docs deployment notes, and `dogfood:verify` smoke checks against built routes, CLI package docs, generated golden docs, and selected Cloudflare/Supabase boundary claims.
+
+The docs site remains static Astro output. The Cloudflare config uses Workers static assets with `assets.directory = "./dist"` and no Worker entrypoint, secrets, bindings, SPA fallback, or Astro Cloudflare adapter. Missing routes retain default static-assets 404 behavior.
+
+Verification completed on 2026-05-15:
+
+- `pnpm --filter @bankstack/docs check`
+- `pnpm --filter @bankstack/docs build`
+- `pnpm --filter @bankstack/docs dogfood:verify`
+- `pnpm --filter @bankstack/docs deploy:dry-run`
+- `pnpm check`
+- `pnpm build`
+- `pnpm --filter create-bankstack test`
+- Local Wrangler preview at `http://127.0.0.1:8788/docs/` returned `200 OK`
+- Local Wrangler preview at `http://127.0.0.1:8788/not-a-real-route` returned `404 Not Found`
+
+Cloudflare source checks on 2026-05-15 confirmed Workers static assets use `assets.directory`, `wrangler.jsonc` is the recommended config format, and `single-page-application` fallback is for SPA routing rather than this static multi-page docs site.
 
 Once this task is done, TASK-015 can use the implemented docs and alpha CLI conventions as source material for `skills/bankstack-expert`.
 
