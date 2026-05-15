@@ -1,0 +1,77 @@
+---
+import SiteLayout from "../layouts/SiteLayout.astro";
+---
+
+<SiteLayout
+  title="Bankstack"
+  description="Bankstack docs for the alpha create-bankstack CLI and split-stack conventions."
+>
+  <div class="page">
+    <section class="hero" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">Alpha docs foundation</p>
+        <h1 id="page-title">Bankstack</h1>
+        <p class="lede">
+          Scaffolding and conventions for pnpm-only Nx monorepos built around a
+          Cloudflare edge plus Supabase split stack.
+        </p>
+        <div class="actions" aria-label="Primary actions">
+          <a class="button" data-kind="primary" href="#install">Install alpha</a>
+          <a class="button" href="#shape">View generated shape</a>
+        </div>
+      </div>
+      <div class="stack-map" aria-label="Bankstack generated workspace map">
+        <div class="stack-map__row">
+          <span class="stack-map__label">Apps</span>
+          <span class="stack-map__value">Astro, SvelteKit, Hono Workers</span>
+        </div>
+        <div class="stack-map__row">
+          <span class="stack-map__label">Packages</span>
+          <span class="stack-map__value">UI, Supabase, shared utilities</span>
+        </div>
+        <div class="stack-map__row">
+          <span class="stack-map__label">Runtime</span>
+          <span class="stack-map__value">Node 22.12+, pnpm 10+, Nx</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="install" aria-labelledby="install-title">
+      <div>
+        <p class="eyebrow">Install</p>
+        <h2 id="install-title">Run the alpha CLI</h2>
+      </div>
+      <div class="section__body">
+        <p>
+          The current published alpha is <code>0.1.0-alpha.0</code>. Prefer the
+          explicit alpha tag until Bankstack intentionally promotes a stable
+          release.
+        </p>
+        <div class="command-list" aria-label="Alpha install commands">
+          <pre><code>pnpm dlx create-bankstack@alpha my-bankstack-app</code></pre>
+          <pre><code>npx create-bankstack@alpha my-bankstack-app</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="shape" aria-labelledby="shape-title">
+      <div>
+        <p class="eyebrow">Generated shape</p>
+        <h2 id="shape-title">Local-first by design</h2>
+      </div>
+      <div class="section__body">
+        <p>
+          The alpha scaffold generates a workspace you can inspect, install,
+          build, and adapt locally. It does not provision Cloudflare resources,
+          create Supabase projects, configure production secrets, or deploy the
+          app for you.
+        </p>
+        <p class="note">
+          This docs app is intentionally static for the foundation slice. Future
+          content can move into Astro content collections without adding server
+          rendering unless a real docs feature needs it.
+        </p>
+      </div>
+    </section>
+  </div>
+</SiteLayout>

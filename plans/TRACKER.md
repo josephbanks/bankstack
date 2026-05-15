@@ -76,12 +76,12 @@ TASK-000
 
 ## Phase 6: Dogfood Site
 
-| ID       | Task                                                                                                   | Status | Depends On | Blocks   | Owner/Session          | Acceptance Summary                                                                                            |
-| -------- | ------------------------------------------------------------------------------------------------------ | ------ | ---------- | -------- | ---------------------- | ------------------------------------------------------------------------------------------------------------- |
-| TASK-014 | [Dogfood Docs Site](tasks/TASK-014-dogfood-docs-site.md)                                               | Done   | TASK-013   | TASK-016 | Codex planning session | `apps/docs` milestone is planned and can dogfood the CLI conventions after alpha.                             |
-| TASK-016 | [Docs Site Foundation](tasks/TASK-016-docs-site-foundation.md)                                         | Todo   | TASK-014   | TASK-017 | Unassigned             | `apps/docs` exists as a minimal Astro docs app wired into pnpm/Nx local checks.                               |
-| TASK-017 | [Docs Content And IA](tasks/TASK-017-docs-content-and-ia.md)                                           | Todo   | TASK-016   | TASK-018 | Unassigned             | Public docs explain the alpha CLI, architecture, setup path, and conventions from repo source material.       |
-| TASK-018 | [Docs Deployment And Dogfood Verification](tasks/TASK-018-docs-deployment-and-dogfood-verification.md) | Todo   | TASK-017   | TASK-015 | Unassigned             | Docs deployment and smoke verification prove the repo can dogfood its own conventions without template drift. |
+| ID       | Task                                                                                                   | Status | Depends On | Blocks   | Owner/Session                | Acceptance Summary                                                                                            |
+| -------- | ------------------------------------------------------------------------------------------------------ | ------ | ---------- | -------- | ---------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| TASK-014 | [Dogfood Docs Site](tasks/TASK-014-dogfood-docs-site.md)                                               | Done   | TASK-013   | TASK-016 | Codex planning session       | `apps/docs` milestone is planned and can dogfood the CLI conventions after alpha.                             |
+| TASK-016 | [Docs Site Foundation](tasks/TASK-016-docs-site-foundation.md)                                         | Done   | TASK-014   | TASK-017 | Codex implementation session | `apps/docs` exists as a minimal Astro docs app wired into pnpm/Nx local checks.                               |
+| TASK-017 | [Docs Content And IA](tasks/TASK-017-docs-content-and-ia.md)                                           | Todo   | TASK-016   | TASK-018 | Unassigned                   | Public docs explain the alpha CLI, architecture, setup path, and conventions from repo source material.       |
+| TASK-018 | [Docs Deployment And Dogfood Verification](tasks/TASK-018-docs-deployment-and-dogfood-verification.md) | Todo   | TASK-017   | TASK-015 | Unassigned                   | Docs deployment and smoke verification prove the repo can dogfood its own conventions without template drift. |
 
 ## Phase 7: Agent Skill
 

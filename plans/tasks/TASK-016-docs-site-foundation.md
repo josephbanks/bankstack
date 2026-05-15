@@ -2,7 +2,7 @@
 
 ## Status
 
-Todo
+Done
 
 ## Depends On
 
@@ -51,6 +51,18 @@ Use Astro content and routing conventions that can later support structured docs
 Run the new docs app's local check and build commands. Run the relevant root verification command that proves the app is visible to Nx, such as `pnpm check` or the narrower equivalent if full verification is too expensive. If a dev server is started, inspect the local page in a browser.
 
 ## Handoff Notes
+
+Completed as a static Astro 6.3.3 app under `apps/docs`, using package-script targets so Nx discovers `@bankstack/docs` through the existing `apps/*` workspace glob. The first route introduces Bankstack, documents `pnpm dlx create-bankstack@alpha` and `npx create-bankstack@alpha`, and notes `0.1.0-alpha.0` as the current alpha.
+
+Verification completed:
+
+- `pnpm --filter @bankstack/docs check`
+- `pnpm --filter @bankstack/docs build`
+- `pnpm check`
+- `pnpm build`
+- Local dev server inspection at `http://127.0.0.1:4321/`; sandboxed server bind failed with `EPERM`, then succeeded with approved escalation.
+
+Source checks completed on 2026-05-15: Astro project structure and TypeScript docs support the `src/pages`, `astro.config.mjs`, `tsconfig.json`, and `astro check && astro build` shape; Nx docs support package-script task discovery; pnpm/npm registry metadata still reports `create-bankstack@0.1.0-alpha.0` on `alpha`; Cloudflare guidance supports static assets without the Astro Cloudflare adapter until SSR/on-demand rendering is needed.
 
 TASK-017 should use this foundation to migrate public docs content from `VISION.md`, `ARCHITECTURE_OVERVIEW.md`, `SETUP_GUIDE.md`, `packages/create-bankstack/README.md`, and the generated template docs.
 
