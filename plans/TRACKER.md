@@ -24,7 +24,10 @@ TASK-000
                 -> TASK-012
                   -> TASK-013
                     -> TASK-014
-                      -> TASK-015
+                      -> TASK-016
+                        -> TASK-017
+                          -> TASK-018
+                            -> TASK-015
 ```
 
 ## Phase 0: Planning System
@@ -73,12 +76,15 @@ TASK-000
 
 ## Phase 6: Dogfood Site
 
-| ID       | Task                                                     | Status | Depends On | Blocks   | Owner/Session | Acceptance Summary                                                                |
-| -------- | -------------------------------------------------------- | ------ | ---------- | -------- | ------------- | --------------------------------------------------------------------------------- |
-| TASK-014 | [Dogfood Docs Site](tasks/TASK-014-dogfood-docs-site.md) | Todo   | TASK-013   | TASK-015 | Unassigned    | `apps/docs` milestone is planned and can dogfood the CLI conventions after alpha. |
+| ID       | Task                                                                                                   | Status | Depends On | Blocks   | Owner/Session          | Acceptance Summary                                                                                            |
+| -------- | ------------------------------------------------------------------------------------------------------ | ------ | ---------- | -------- | ---------------------- | ------------------------------------------------------------------------------------------------------------- |
+| TASK-014 | [Dogfood Docs Site](tasks/TASK-014-dogfood-docs-site.md)                                               | Done   | TASK-013   | TASK-016 | Codex planning session | `apps/docs` milestone is planned and can dogfood the CLI conventions after alpha.                             |
+| TASK-016 | [Docs Site Foundation](tasks/TASK-016-docs-site-foundation.md)                                         | Todo   | TASK-014   | TASK-017 | Unassigned             | `apps/docs` exists as a minimal Astro docs app wired into pnpm/Nx local checks.                               |
+| TASK-017 | [Docs Content And IA](tasks/TASK-017-docs-content-and-ia.md)                                           | Todo   | TASK-016   | TASK-018 | Unassigned             | Public docs explain the alpha CLI, architecture, setup path, and conventions from repo source material.       |
+| TASK-018 | [Docs Deployment And Dogfood Verification](tasks/TASK-018-docs-deployment-and-dogfood-verification.md) | Todo   | TASK-017   | TASK-015 | Unassigned             | Docs deployment and smoke verification prove the repo can dogfood its own conventions without template drift. |
 
 ## Phase 7: Agent Skill
 
 | ID       | Task                                                               | Status | Depends On | Blocks | Owner/Session | Acceptance Summary                                                   |
 | -------- | ------------------------------------------------------------------ | ------ | ---------- | ------ | ------------- | -------------------------------------------------------------------- |
-| TASK-015 | [Bankstack Expert Skill](tasks/TASK-015-bankstack-expert-skill.md) | Todo   | TASK-014   | None   | Unassigned    | `skills/bankstack-expert` milestone is planned after docs stabilize. |
+| TASK-015 | [Bankstack Expert Skill](tasks/TASK-015-bankstack-expert-skill.md) | Todo   | TASK-018   | None   | Unassigned    | `skills/bankstack-expert` milestone is planned after docs stabilize. |
