@@ -28,8 +28,8 @@ This **bankstack** repository is also the **canonical dogfood**: the public site
 2. **`apps/*` (example and docs)**  
    Applications in this repo demonstrate the stack in production use. A docs or marketing app proves the same adapters, bindings, and patterns consumers get from the CLI.
 
-3. **`skills/bankstack-expert/SKILL.md` and skills.sh**  
-   **Agent skills** are portable instruction bundles (typically a folder with `SKILL.md` and optional assets) that coding agents can load from project paths such as `.cursor/skills/` or `.agents/skills/`. The [skills.sh](https://skills.sh/) ecosystem and tools like `npx skills add …` let developers install a skill **without** scaffolding a full Bankstack repo—useful when you already have a codebase but want Bankstack-specific guardrails and workflows. The CLI targets **greenfield** monorepos; the skill targets **existing** projects and agent sessions.
+3. **`skills/bankstack-expert/SKILL.md` and local skill installs**  
+   **Agent skills** are portable instruction bundles (typically a folder with `SKILL.md` and optional metadata/assets) that coding agents can load from local or repo-scoped skill paths. `skills/bankstack-expert` is the lightweight existing-project surface: copy or reference the folder from a local skills directory or project skills directory when you already have a codebase but want Bankstack-specific guardrails and workflows. The [skills.sh](https://skills.sh/) ecosystem remains a future distribution option; this repo does not yet automate publishing there. The CLI targets **greenfield** monorepos; the skill targets **existing** projects and agent sessions.
 
 ## Dogfooding
 
@@ -57,7 +57,7 @@ The tree below describes the **target** layout for this repository as the produc
 │   └── /create-bankstack     # Node CLI published to npm; scaffolds new Bankstack workspaces
 ├── /skills
 │   └── /bankstack-expert
-│       └── SKILL.md          # Agent skill; distributable via skills.sh separately from the CLI
+│       └── SKILL.md          # Agent skill; local/repo install surface separate from the CLI
 ├── package.json
 └── nx.json
 ```

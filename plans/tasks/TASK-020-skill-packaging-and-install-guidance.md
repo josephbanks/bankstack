@@ -2,7 +2,7 @@
 
 ## Status
 
-Todo
+Done
 
 ## Depends On
 
@@ -45,4 +45,18 @@ Validate the skill file shape against current skill guidance. Run formatting and
 
 ## Handoff Notes
 
-None yet.
+Completed in this session:
+
+- Added minimal UI-facing skill metadata at `skills/bankstack-expert/agents/openai.yaml`, generated from the current skill-creator guidance.
+- Updated repo and public docs so `skills/bankstack-expert` is presented as the existing-project/local skill surface.
+- Kept skills.sh and marketplace publishing automation explicitly deferred.
+
+Verification:
+
+- `python3 /Users/josephbanks/.codex/skills/.system/skill-creator/scripts/generate_openai_yaml.py skills/bankstack-expert --name bankstack-expert ...`
+- `node -e '...'` direct skill shape check for `SKILL.md` frontmatter and `agents/openai.yaml`.
+- `pnpm format:check`
+- `pnpm --filter @bankstack/docs build`
+- `pnpm --filter @bankstack/docs dogfood:verify`
+
+Note: the bundled `quick_validate.py` skill validator could not run in this local Python environment because `PyYAML` is not installed (`ModuleNotFoundError: No module named 'yaml'`).

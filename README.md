@@ -8,7 +8,7 @@ pnpm dlx create-bankstack@alpha my-bankstack-app
 npx create-bankstack@alpha my-bankstack-app
 ```
 
-Use [VISION.md](VISION.md) for the product direction, [packages/create-bankstack](packages/create-bankstack) for the published CLI source, [apps/docs](apps/docs) for the docs site source, and [SETUP_GUIDE.md](SETUP_GUIDE.md) only as historical/deep-reference context for the manual bootstrap path the CLI now encodes.
+Use [VISION.md](VISION.md) for the product direction, [packages/create-bankstack](packages/create-bankstack) for the published CLI source, [apps/docs](apps/docs) for the docs site source, [skills/bankstack-expert](skills/bankstack-expert) for existing-project agent guidance, and [SETUP_GUIDE.md](SETUP_GUIDE.md) only as historical/deep-reference context for the manual bootstrap path the CLI now encodes.
 
 ## CI
 

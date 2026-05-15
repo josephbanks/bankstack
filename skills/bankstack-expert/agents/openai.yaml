@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bankstack Expert"
+  short_description: "Bankstack architecture and workflow guardrails"
+  default_prompt: "Use $bankstack-expert to review this project against Bankstack CLI, docs, and boundary conventions."
