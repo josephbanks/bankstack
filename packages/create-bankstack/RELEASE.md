@@ -1,17 +1,21 @@
 # create-bankstack Alpha Release Checklist
 
-This checklist records the manual `create-bankstack@0.1.0-alpha.0` npm release. It does not automate publishing and does not require npm tokens in CI.
+This checklist records manual `create-bankstack` alpha releases. It does not automate publishing and does not require npm tokens in CI.
 
 ## Current Alpha Target
 
 - Package: `create-bankstack`
-- Version: `0.1.0-alpha.0`
+- Version: `0.1.0-alpha.1`
 - Intended dist tag: `alpha`
 - Registry: `https://registry.npmjs.org/`
 - Access: public
-- GitHub Actions candidate run: https://github.com/josephbanks/bankstack/actions/runs/25922733713
+- GitHub Actions candidate run: https://github.com/josephbanks/bankstack/actions/runs/25931386359
 
 ## Published State
+
+`0.1.0-alpha.1` is the next planned alpha. Publish it after `https://bankstack.dev/docs/alpha-cli/` is live, local verification passes, and the GitHub Actions candidate run is green.
+
+### Previous alpha.0
 
 Published on 2026-05-15 as `create-bankstack@0.1.0-alpha.0`.
 
@@ -93,8 +97,13 @@ If your npm account requires two-factor authentication, follow the prompt or pas
 After publishing:
 
 ```sh
-npm view create-bankstack@0.1.0-alpha.0 version --registry https://registry.npmjs.org/
+npm view create-bankstack@0.1.0-alpha.1 version --registry https://registry.npmjs.org/
 npm view create-bankstack dist-tags --registry https://registry.npmjs.org/
 ```
 
-Expected result: `0.1.0-alpha.0` exists and the `alpha` dist-tag points at it. npm may keep `latest` pointed at the first and only version; if removing `latest` returns `E400 Bad Request`, leave it as-is and move `latest` intentionally on the first stable release.
+Expected result: `0.1.0-alpha.1` exists and the `alpha` dist-tag points at it. If npm keeps `latest` pointed at `0.1.0-alpha.0`, decide whether the package page should show the new metadata immediately. Because `latest` already points at an alpha for this package, it is acceptable to move `latest` intentionally to `0.1.0-alpha.1` after verifying the publish:
+
+```sh
+npm dist-tag add create-bankstack@0.1.0-alpha.1 latest --registry https://registry.npmjs.org/
+npm view create-bankstack dist-tags --registry https://registry.npmjs.org/
+```

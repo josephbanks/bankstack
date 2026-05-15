@@ -43,7 +43,7 @@ await mkdir(tempRoot, { recursive: true });
 try {
   let result = run(["--version"]);
   assertExit(result, 0, "--version");
-  assertIncludes(result.stdout, "0.1.0-alpha.0", "--version stdout");
+  assertIncludes(result.stdout, "0.1.0-alpha.1", "--version stdout");
 
   result = run(["--yes", "--no-install", "--no-git"], { cwd: tempRoot });
   assertExit(result, 0, "--yes flow");
