@@ -16,15 +16,24 @@
 
 <main class="shell">
   <aside class="rail" aria-label="Workspace navigation">
-    <a class="brand" href="/" aria-label="Bankstack dashboard home">
-      <span class="mark" aria-hidden="true">B</span>
-      <span>Dashboard</span>
-    </a>
-    <nav>
-      <a aria-current="page" href="/">Overview</a>
-      <a href="/">Requests</a>
-      <a href="/">Settings</a>
-    </nav>
+    <div>
+      <a class="brand" href="/" aria-label="Bankstack dashboard home">
+        <span class="mark" aria-hidden="true">B</span>
+        <span>Dashboard</span>
+      </a>
+      <nav>
+        <a aria-current="page" href="/">Overview</a>
+        <a href="/">Requests</a>
+        <a href="/">Settings</a>
+      </nav>
+    </div>
+    <p class="attribution">
+      Built with
+      <a
+        href="https://bankstack.dev/"
+        target="_blank"
+        rel="nofollow noopener noreferrer">Bankstack</a>
+    </p>
   </aside>
 
   <section class="content" aria-labelledby="dashboard-title">
@@ -74,6 +83,10 @@
   }
 
   .rail {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 2rem;
     padding: 1.25rem;
     background: oklch(23% 0.045 245);
     color: oklch(94% 0.012 235);
@@ -113,6 +126,19 @@
   nav a[aria-current="page"] {
     color: oklch(98% 0.006 235);
     background: oklch(33% 0.055 245);
+  }
+
+  .attribution {
+    margin: 0;
+    color: oklch(77% 0.022 240);
+    font-size: 0.86rem;
+  }
+
+  .attribution a {
+    color: oklch(94% 0.012 235);
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
   }
 
   .content {
@@ -193,7 +219,7 @@
 
     .rail {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: space-between;
       gap: 1rem;
     }

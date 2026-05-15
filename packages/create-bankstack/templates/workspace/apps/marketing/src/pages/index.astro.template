@@ -26,10 +26,18 @@ const stackSummary = describeLocalStack(projectName);
       <p class="lede">
         {stackSummary}
       </p>
-      <a class={primaryActionClassName} href="http://localhost:5173"
-        >Open dashboard</a
+      <a
+        class={`${primaryActionClassName} primary-link`}
+        href="http://localhost:5173">Open dashboard</a
       >
     </main>
+    <footer>
+      Built with
+      <a
+        href="https://bankstack.dev/"
+        target="_blank"
+        rel="nofollow noopener noreferrer">Bankstack</a>
+    </footer>
   </body>
 </html>
 
@@ -49,7 +57,7 @@ const stackSummary = describeLocalStack(projectName);
     display: grid;
     align-content: center;
     margin: 0 auto;
-    padding: 4rem 0;
+    padding: 4rem 0 5rem;
   }
 
   .eyebrow {
@@ -77,7 +85,7 @@ const stackSummary = describeLocalStack(projectName);
     line-height: 1.65;
   }
 
-  a {
+  .primary-link {
     width: fit-content;
     border: 1px solid oklch(29% 0.04 235);
     border-radius: 0.45rem;
@@ -86,5 +94,20 @@ const stackSummary = describeLocalStack(projectName);
     background: oklch(27% 0.045 235);
     font-weight: 700;
     text-decoration: none;
+  }
+
+  footer {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    color: oklch(43% 0.035 235);
+    font-size: 0.88rem;
+  }
+
+  footer a {
+    color: oklch(29% 0.05 235);
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
   }
 </style>
