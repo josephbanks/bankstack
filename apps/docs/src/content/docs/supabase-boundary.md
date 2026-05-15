@@ -1,7 +1,7 @@
 ---
 title: Supabase Boundary
 description: Bankstack keeps Supabase credentials, auth checks, and RLS policy work explicit instead of provisioning them for you.
-order: 5
+order: 6
 ---
 
 The alpha scaffold includes Supabase placeholders so app code has a clear boundary for identity and data access. It does not create a Supabase project, product tables, auth UI, migrations for your domain, or row level security policies for real data.

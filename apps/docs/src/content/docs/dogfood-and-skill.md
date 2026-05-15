@@ -1,7 +1,7 @@
 ---
 title: Dogfood And Skill
 description: The repo, CLI, docs site, and Bankstack expert skill should stay aligned as one product surface.
-order: 6
+order: 7
 ---
 
 This repository is the canonical dogfood project for Bankstack. The CLI package, public docs, and agent skill should evolve from the same source material instead of drifting into separate stories.

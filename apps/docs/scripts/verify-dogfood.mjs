@@ -10,6 +10,7 @@ const requiredBuildFiles = [
   "dist/docs/alpha-cli/index.html",
   "dist/docs/cloudflare-boundary/index.html",
   "dist/docs/dogfood-and-skill/index.html",
+  "dist/docs/distribution/index.html",
   "dist/docs/generated-workspace/index.html",
   "dist/docs/supabase-boundary/index.html",
   "dist/docs/what-is-bankstack/index.html",
@@ -17,6 +18,7 @@ const requiredBuildFiles = [
 
 const requiredDocsFiles = [
   "src/content/docs/alpha-cli.md",
+  "src/content/docs/distribution.md",
   "src/content/docs/generated-workspace.md",
   "src/content/docs/cloudflare-boundary.md",
   "src/content/docs/supabase-boundary.md",
@@ -49,6 +51,7 @@ const goldenSetup = readWorkspace(
   "packages/create-bankstack/scripts/goldens/cli/generated/SETUP.md",
 );
 const alphaDocs = readDocs("src/content/docs/alpha-cli.md");
+const distributionDocs = readDocs("src/content/docs/distribution.md");
 const generatedDocs = readDocs("src/content/docs/generated-workspace.md");
 const cloudflareDocs = readDocs("src/content/docs/cloudflare-boundary.md");
 const supabaseDocs = readDocs("src/content/docs/supabase-boundary.md");
@@ -58,6 +61,22 @@ const requiredClaims = [
   [cliReadme, "npx create-bankstack@alpha", "CLI README alpha npx usage"],
   [alphaDocs, "pnpm dlx create-bankstack@alpha", "docs alpha pnpm usage"],
   [alphaDocs, "npx create-bankstack@alpha", "docs alpha npx usage"],
+  [
+    distributionDocs,
+    "pnpm dlx create-bankstack@alpha",
+    "distribution docs alpha pnpm usage",
+  ],
+  [
+    distributionDocs,
+    "npx create-bankstack@alpha",
+    "distribution docs alpha npx usage",
+  ],
+  [
+    distributionDocs,
+    "skills/bankstack-expert",
+    "distribution docs skill guidance",
+  ],
+  [distributionDocs, "GitHub issues", "distribution docs feedback path"],
   [goldenReadme, "apps/marketing", "generated README marketing app"],
   [goldenReadme, "apps/dashboard", "generated README dashboard app"],
   [goldenReadme, "apps/api", "generated README API app"],

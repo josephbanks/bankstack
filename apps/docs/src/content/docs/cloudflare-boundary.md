@@ -1,7 +1,7 @@
 ---
 title: Cloudflare Boundary
 description: Bankstack templates show Cloudflare Workers conventions without creating or deploying Cloudflare resources.
-order: 4
+order: 5
 ---
 
 Bankstack treats Cloudflare as the edge runtime for the generated dashboard and API examples. The alpha scaffold includes Wrangler JSONC examples, but it does not authenticate with Wrangler, create Workers, configure domains, or deploy anything automatically.

@@ -2,7 +2,7 @@
 
 ## Status
 
-Todo
+Done
 
 ## Depends On
 
@@ -45,4 +45,15 @@ Run the docs check/build commands and workspace checks. Review generated routes 
 
 ## Handoff Notes
 
-None yet.
+Completed in this session:
+
+- Added `apps/docs/src/content/docs/distribution.md` as the public adoption entrypoint for CLI, skill, alpha limits, and feedback paths.
+- Linked the distribution guide from the homepage and docs hub.
+- Extended dogfood verification to require the distribution route and key CLI/skill/feedback claims.
+
+Verification:
+
+- `pnpm format`
+- `pnpm format:check`
+- `pnpm --filter @bankstack/docs build`
+- `pnpm --filter @bankstack/docs dogfood:verify`

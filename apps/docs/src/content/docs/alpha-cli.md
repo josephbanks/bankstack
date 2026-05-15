@@ -1,7 +1,7 @@
 ---
 title: Alpha CLI
 description: Install and run the current create-bankstack alpha with explicit alpha tags.
-order: 2
+order: 3
 ---
 
 Use the npm `alpha` dist-tag for the current alpha. The docs prefer the explicit alpha tag until the project intentionally promotes a stable release.

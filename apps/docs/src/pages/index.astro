@@ -21,8 +21,8 @@ const docs = sortDocs(await getCollection("docs"));
           Cloudflare edge plus Supabase split stack.
         </p>
         <div class="actions" aria-label="Primary actions">
-          <a class="button" data-kind="primary" href="/docs/alpha-cli/"
-            >Install alpha</a
+          <a class="button" data-kind="primary" href="/docs/distribution/"
+            >Choose a path</a
           >
           <a class="button" href="/docs/generated-workspace/"
             >View generated shape</a
@@ -48,12 +48,12 @@ const docs = sortDocs(await getCollection("docs"));
     <section class="section" aria-labelledby="docs-title">
       <div>
         <p class="eyebrow">Read the docs</p>
-        <h2 id="docs-title">Start with the alpha map</h2>
+        <h2 id="docs-title">Start with distribution</h2>
       </div>
       <div class="section__body">
         <p>
-          These pages turn the repo source material into public docs while
-          keeping generated-template behavior as the source of truth.
+          Start with the adoption path, then use the generated workspace and
+          boundary docs to connect real services intentionally.
         </p>
         <div class="doc-grid">
           {
@@ -71,18 +71,22 @@ const docs = sortDocs(await getCollection("docs"));
     <section class="section" id="install" aria-labelledby="install-title">
       <div>
         <p class="eyebrow">Install</p>
-        <h2 id="install-title">Run the alpha CLI</h2>
+        <h2 id="install-title">Run the CLI or use the skill</h2>
       </div>
       <div class="section__body">
         <p>
-          The current repo alpha is <code>{currentAlphaVersion}</code>. Prefer
-          the explicit alpha tag until Bankstack intentionally promotes a stable
-          release.
+          The current repo alpha is <code>{currentAlphaVersion}</code>. Use the
+          CLI for greenfield workspaces, or the Bankstack expert skill for
+          existing projects and agent sessions.
         </p>
         <div class="command-list" aria-label="Alpha install commands">
           <pre><code>pnpm dlx create-bankstack@alpha my-bankstack-app</code></pre>
           <pre><code>npx create-bankstack@alpha my-bankstack-app</code></pre>
         </div>
+        <p>
+          <a href="/docs/distribution/">Read the distribution guide</a> for
+          limits, skill usage, and feedback paths.
+        </p>
       </div>
     </section>
 

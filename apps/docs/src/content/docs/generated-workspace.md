@@ -1,7 +1,7 @@
 ---
 title: Generated Workspace
 description: The alpha scaffold creates a local-first Nx workspace with three apps and three shared packages.
-order: 3
+order: 4
 ---
 
 The generated project is a pnpm-only Nx monorepo. It is designed to pass local verification before you connect external infrastructure.
