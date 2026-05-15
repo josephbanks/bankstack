@@ -2,7 +2,7 @@
 
 ## Status
 
-Todo
+Done
 
 ## Depends On
 
@@ -47,14 +47,20 @@ TASK-011 added the local generated-project smoke command as `pnpm smoke:generate
 
 ## Verification
 
-Run the same commands locally. If possible, inspect workflow syntax with available tooling before committing.
+- `pnpm install --frozen-lockfile`
+- `pnpm exec prettier --check .github/workflows/ci.yml README.md plans/TRACKER.md plans/tasks/TASK-012-ci-checks.md`
+- `pnpm format:check`
+- `pnpm check`
+- `pnpm --filter create-bankstack test`
+- `pnpm smoke:generated`
+
+The first sandboxed `pnpm smoke:generated` run could not reach `registry.npmjs.org` and was terminated after repeated `ENOTFOUND` retries. The rerun with registry access passed.
 
 ## Handoff Notes
 
 TASK-013 depends on CI being green, but actual npm publishing remains manual for the alpha.
 
-Suggested local command sequence before committing TASK-012:
+CI uses `pnpm/action-setup@v6` to install pnpm from the root `packageManager` field and `actions/setup-node@v6` with the built-in pnpm cache keyed by `pnpm-lock.yaml`. Sources checked:
 
-- `pnpm install --frozen-lockfile`
-- `pnpm --filter create-bankstack test`
-- `pnpm smoke:generated`
+- https://github.com/pnpm/action-setup
+- https://github.com/actions/setup-node
