@@ -2,7 +2,7 @@
 
 ## Status
 
-Todo
+Done
 
 ## Depends On
 
@@ -45,4 +45,16 @@ Run formatting checks. If a command checklist is added, dry-run commands that ar
 
 ## Handoff Notes
 
-None yet.
+Completed in this session:
+
+- Added `plans/DOGFOOD.md` with generated-project smoke checks, docs/skill drift checks, feedback intake fields, and triage rules.
+- Linked the loop from `plans/README.md` and public dogfood docs.
+- Extended docs dogfood verification to require the loop link and generated smoke command.
+
+Verification:
+
+- `pnpm format:check`
+- `pnpm --filter @bankstack/docs build`
+- `pnpm --filter @bankstack/docs dogfood:verify`
+- `pnpm --filter create-bankstack test`
+- `pnpm smoke:generated`

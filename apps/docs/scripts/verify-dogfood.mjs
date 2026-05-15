@@ -55,6 +55,8 @@ const distributionDocs = readDocs("src/content/docs/distribution.md");
 const generatedDocs = readDocs("src/content/docs/generated-workspace.md");
 const cloudflareDocs = readDocs("src/content/docs/cloudflare-boundary.md");
 const supabaseDocs = readDocs("src/content/docs/supabase-boundary.md");
+const dogfoodDocs = readDocs("src/content/docs/dogfood-and-skill.md");
+const dogfoodProcess = readWorkspace("plans/DOGFOOD.md");
 
 const requiredClaims = [
   [cliReadme, "pnpm dlx create-bankstack@alpha", "CLI README alpha pnpm usage"],
@@ -77,6 +79,12 @@ const requiredClaims = [
     "distribution docs skill guidance",
   ],
   [distributionDocs, "GitHub issues", "distribution docs feedback path"],
+  [dogfoodDocs, "plans/DOGFOOD.md", "dogfood docs process link"],
+  [
+    dogfoodProcess,
+    "pnpm smoke:generated",
+    "dogfood process generated smoke command",
+  ],
   [goldenReadme, "apps/marketing", "generated README marketing app"],
   [goldenReadme, "apps/dashboard", "generated README dashboard app"],
   [goldenReadme, "apps/api", "generated README API app"],

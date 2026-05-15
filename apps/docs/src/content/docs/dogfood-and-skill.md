@@ -32,6 +32,6 @@ For repo-scoped sharing, keep the same folder under a project skills directory s
 
 When docs mention a generated file or behavior, that claim should be checked against the CLI templates or generated golden output. When the templates change, public docs should change with them. When the docs identify a missing convention, record a follow-up task instead of quietly promising behavior the alpha does not ship.
 
-The docs site includes dogfood verification so this repository can host a real public surface without drifting from `create-bankstack@alpha`.
+The docs site includes dogfood verification so this repository can host a real public surface without drifting from `create-bankstack@alpha`. Maintainer dogfood and feedback triage lives in [`plans/DOGFOOD.md`](https://github.com/josephbanks/bankstack/blob/main/plans/DOGFOOD.md): run generated-project smoke checks when package output changes, check docs and skill claims against generated output, and turn real drift into tracker tasks.
 
-Canonical source material: [`VISION.md`](https://github.com/josephbanks/bankstack/blob/main/VISION.md), [`skills/bankstack-expert`](https://github.com/josephbanks/bankstack/tree/main/skills/bankstack-expert), [`plans/TRACKER.md`](https://github.com/josephbanks/bankstack/blob/main/plans/TRACKER.md), and the generated golden docs.
+Canonical source material: [`VISION.md`](https://github.com/josephbanks/bankstack/blob/main/VISION.md), [`skills/bankstack-expert`](https://github.com/josephbanks/bankstack/tree/main/skills/bankstack-expert), [`plans/TRACKER.md`](https://github.com/josephbanks/bankstack/blob/main/plans/TRACKER.md), [`plans/DOGFOOD.md`](https://github.com/josephbanks/bankstack/blob/main/plans/DOGFOOD.md), and the generated golden docs.

@@ -14,6 +14,8 @@ This directory is the planning system for Bankstack. It exists so future agents 
 
 Completed milestone history is preserved under [archive](archive). Use archive files for context, not as the active task queue.
 
+Use [DOGFOOD.md](DOGFOOD.md) when a task needs generated-project checks, docs/template drift review, or feedback triage.
+
 ## Status Values
 
 Use only these statuses:
