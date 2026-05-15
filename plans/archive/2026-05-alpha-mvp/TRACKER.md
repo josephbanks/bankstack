@@ -1,0 +1,100 @@
+# Bankstack Alpha MVP Archive
+
+This archive preserves the completed first Bankstack planning wave. The active tracker now lives at [`../../TRACKER.md`](../../TRACKER.md), and active task files live at [`../../tasks`](../../tasks).
+
+## Milestone Summary
+
+Completed on 2026-05-15:
+
+- Planned and executed the initial Bankstack planning system.
+- Built the root pnpm/Nx repo foundation.
+- Implemented the `create-bankstack` alpha CLI, template renderer, generated workspace templates, docs, tests, CI, and release checklist.
+- Published the alpha path and created the dogfood docs site.
+- Added the initial `skills/bankstack-expert/SKILL.md` adoption surface.
+
+## Status Values
+
+Use only `Todo`, `Doing`, `Blocked`, or `Done`.
+
+## Completed Dependency Flow
+
+```text
+TASK-000
+  -> TASK-001
+    -> TASK-002
+      -> TASK-003
+      -> TASK-004
+        -> TASK-005
+          -> TASK-006
+          -> TASK-007
+          -> TASK-008
+            -> TASK-009
+              -> TASK-010
+              -> TASK-011
+                -> TASK-012
+                  -> TASK-013
+                    -> TASK-014
+                      -> TASK-016
+                        -> TASK-017
+                          -> TASK-018
+                            -> TASK-015
+```
+
+## Phase 0: Planning System
+
+| ID       | Task                                                 | Status | Depends On | Blocks   | Owner/Session                   | Acceptance Summary                                                                               |
+| -------- | ---------------------------------------------------- | ------ | ---------- | -------- | ------------------------------- | ------------------------------------------------------------------------------------------------ |
+| TASK-000 | [Planning System](tasks/TASK-000-planning-system.md) | Done   | None       | TASK-001 | Codex planning scaffold session | `plans/` contains a tracker, usage README, and task files that future agents can execute safely. |
+
+## Phase 1: Repo Foundation
+
+| ID       | Task                                                 | Status | Depends On | Blocks   | Owner/Session                | Acceptance Summary                                                                                              |
+| -------- | ---------------------------------------------------- | ------ | ---------- | -------- | ---------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| TASK-001 | [Repo Foundation](tasks/TASK-001-repo-foundation.md) | Done   | TASK-000   | TASK-002 | Codex implementation session | Root pnpm/Nx foundation, MIT license, baseline scripts, and metadata are present without product templates yet. |
+
+## Phase 2: CLI Package
+
+| ID       | Task                                                                     | Status | Depends On | Blocks             | Owner/Session                | Acceptance Summary                                                                                          |
+| -------- | ------------------------------------------------------------------------ | ------ | ---------- | ------------------ | ---------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| TASK-002 | [CLI Package Shell](tasks/TASK-002-cli-package-shell.md)                 | Done   | TASK-001   | TASK-003, TASK-004 | Codex implementation session | `packages/create-bankstack` exists with buildable TypeScript package metadata and a binary entrypoint stub. |
+| TASK-003 | [CLI Prompts And Flags](tasks/TASK-003-cli-prompts-and-flags.md)         | Done   | TASK-002   | TASK-010           | Codex implementation session | CLI accepts the MVP prompts and automation flags without generating the final workspace yet.                |
+| TASK-004 | [Template Rendering Engine](tasks/TASK-004-template-rendering-engine.md) | Done   | TASK-002   | TASK-005           | Codex implementation session | CLI has a template-first copy/render engine and exact dependency version policy.                            |
+
+## Phase 3: Core Templates
+
+| ID       | Task                                                                                         | Status | Depends On                   | Blocks                       | Owner/Session                | Acceptance Summary                                                                                        |
+| -------- | -------------------------------------------------------------------------------------------- | ------ | ---------------------------- | ---------------------------- | ---------------------------- | --------------------------------------------------------------------------------------------------------- |
+| TASK-005 | [Generated Workspace Foundation](tasks/TASK-005-generated-workspace-foundation.md)           | Done   | TASK-004                     | TASK-006, TASK-007, TASK-008 | Codex implementation session | Generated project root contains pnpm/Nx metadata, root scripts, and local-first defaults.                 |
+| TASK-006 | [Generated App Templates](tasks/TASK-006-generated-app-templates.md)                         | Done   | TASK-005                     | TASK-009, TASK-011           | Codex implementation session | Generated Astro, SvelteKit, and Hono apps exist with a minimal connected demo.                            |
+| TASK-007 | [Generated Shared Packages](tasks/TASK-007-generated-shared-packages.md)                     | Done   | TASK-005                     | TASK-009, TASK-011           | Codex implementation session | Generated shared UI, Supabase, and utility packages exist with MVP placeholders.                          |
+| TASK-008 | [Cloudflare And Supabase Conventions](tasks/TASK-008-cloudflare-and-supabase-conventions.md) | Done   | TASK-005                     | TASK-009, TASK-011           | Codex implementation session | Generated Wrangler configs, service binding examples, env examples, and auth-boundary placeholders exist. |
+| TASK-009 | [Generated Project Docs](tasks/TASK-009-generated-project-docs.md)                           | Done   | TASK-006, TASK-007, TASK-008 | TASK-010, TASK-011           | Codex implementation session | Generated README and setup notes explain local-first usage and external service setup boundaries.         |
+
+## Phase 4: Verification
+
+| ID       | Task                                                                             | Status | Depends On                             | Blocks   | Owner/Session                | Acceptance Summary                                                        |
+| -------- | -------------------------------------------------------------------------------- | ------ | -------------------------------------- | -------- | ---------------------------- | ------------------------------------------------------------------------- |
+| TASK-010 | [CLI Golden Tests](tasks/TASK-010-cli-golden-tests.md)                           | Done   | TASK-003, TASK-009                     | TASK-012 | Codex implementation session | CLI rendering is covered by stable golden/snapshot tests.                 |
+| TASK-011 | [Generated Project Smoke Tests](tasks/TASK-011-generated-project-smoke-tests.md) | Done   | TASK-006, TASK-007, TASK-008, TASK-009 | TASK-012 | Codex implementation session | A temp generated project can install and pass build/check smoke tests.    |
+| TASK-012 | [CI Checks](tasks/TASK-012-ci-checks.md)                                         | Done   | TASK-010, TASK-011                     | TASK-013 | Codex implementation session | GitHub Actions run install, CLI tests, and generated-project smoke tests. |
+
+## Phase 5: Alpha Publish
+
+| ID       | Task                                                       | Status | Depends On | Blocks   | Owner/Session                | Acceptance Summary                                                                     |
+| -------- | ---------------------------------------------------------- | ------ | ---------- | -------- | ---------------------------- | -------------------------------------------------------------------------------------- |
+| TASK-013 | [Alpha Publish Prep](tasks/TASK-013-alpha-publish-prep.md) | Done   | TASK-012   | TASK-014 | Codex implementation session | npm name availability, package metadata, and manual alpha release checklist are ready. |
+
+## Phase 6: Dogfood Site
+
+| ID       | Task                                                                                                   | Status | Depends On | Blocks   | Owner/Session                | Acceptance Summary                                                                                            |
+| -------- | ------------------------------------------------------------------------------------------------------ | ------ | ---------- | -------- | ---------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| TASK-014 | [Dogfood Docs Site](tasks/TASK-014-dogfood-docs-site.md)                                               | Done   | TASK-013   | TASK-016 | Codex planning session       | `apps/docs` milestone is planned and can dogfood the CLI conventions after alpha.                             |
+| TASK-016 | [Docs Site Foundation](tasks/TASK-016-docs-site-foundation.md)                                         | Done   | TASK-014   | TASK-017 | Codex implementation session | `apps/docs` exists as a minimal Astro docs app wired into pnpm/Nx local checks.                               |
+| TASK-017 | [Docs Content And IA](tasks/TASK-017-docs-content-and-ia.md)                                           | Done   | TASK-016   | TASK-018 | Codex implementation session | Public docs explain the alpha CLI, architecture, setup path, and conventions from repo source material.       |
+| TASK-018 | [Docs Deployment And Dogfood Verification](tasks/TASK-018-docs-deployment-and-dogfood-verification.md) | Done   | TASK-017   | TASK-015 | Codex implementation session | Docs deployment and smoke verification prove the repo can dogfood its own conventions without template drift. |
+
+## Phase 7: Agent Skill
+
+| ID       | Task                                                               | Status | Depends On | Blocks | Owner/Session                | Acceptance Summary                                                                                |
+| -------- | ------------------------------------------------------------------ | ------ | ---------- | ------ | ---------------------------- | ------------------------------------------------------------------------------------------------- |
+| TASK-015 | [Bankstack Expert Skill](tasks/TASK-015-bankstack-expert-skill.md) | Done   | TASK-018   | None   | Codex implementation session | Initial `skills/bankstack-expert/SKILL.md` exists and aligns with the alpha CLI and dogfood docs. |

@@ -2,7 +2,7 @@
 
 ## Status
 
-Todo
+Done
 
 ## Depends On
 
@@ -45,4 +45,6 @@ Review the skill against `VISION.md`, generated template docs, and the dogfood d
 
 ## Handoff Notes
 
-After this milestone, future work can focus on refining releases, distribution, examples, and real user feedback.
+Completed the initial `skills/bankstack-expert/SKILL.md` after the CLI and docs conventions stabilized. The skill is intentionally concise, targets existing projects and agent sessions, and points agents back to the CLI, docs, generated golden output, and planning system instead of duplicating every convention inline.
+
+Publication/distribution automation is still out of scope. Follow-up work should focus on skill packaging/install guidance, release cadence, source docs cleanup, public distribution docs, and real feedback loops.
