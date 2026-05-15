@@ -1,16 +1,44 @@
 {
   "name": "create-bankstack",
   "version": "0.1.0-alpha.0",
-  "description": "Create a Bankstack split-stack workspace.",
+  "description": "Create a SaaS-ready Bankstack workspace with Cloudflare, Supabase, Nx, and pnpm.",
   "license": "MIT",
   "author": "Joseph Banks",
+  "homepage": "https://bankstack.dev/docs/alpha-cli",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/josephbanks/bankstack.git",
+    "directory": "packages/create-bankstack"
+  },
+  "bugs": {
+    "url": "https://github.com/josephbanks/bankstack/issues"
+  },
   "keywords": [
     "bankstack",
-    "cloudflare",
-    "supabase",
-    "nx",
+    "create",
+    "cli",
     "scaffold",
-    "create"
+    "scaffolding",
+    "starter",
+    "starter-kit",
+    "boilerplate",
+    "saas",
+    "saas-starter",
+    "fullstack",
+    "monorepo",
+    "typescript",
+    "pnpm",
+    "nx",
+    "cloudflare",
+    "cloudflare-workers",
+    "workers",
+    "edge",
+    "supabase",
+    "supabase-auth",
+    "rls",
+    "hono",
+    "astro",
+    "sveltekit"
   ],
   "type": "module",
   "bin": {

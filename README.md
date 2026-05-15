@@ -1,4 +1,4 @@
-We're just starting this project out. Check @VISION.md for the project vision and layout.
+Bankstack is an alpha-stage scaffold and convention set for SaaS-ready Cloudflare edge plus Supabase split-stack monorepos. Start with [VISION.md](VISION.md) for the product direction, [packages/create-bankstack](packages/create-bankstack) for the published CLI, and [apps/docs](apps/docs) for the public docs site.
 
 ## CI
 

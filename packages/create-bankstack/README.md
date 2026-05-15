@@ -1,6 +1,6 @@
 # create-bankstack
 
-`create-bankstack` scaffolds a Bankstack workspace: a pnpm-only Nx monorepo with Cloudflare edge app examples, Supabase boundary placeholders, and shared packages.
+`create-bankstack` scaffolds a SaaS-ready Bankstack workspace: a pnpm-only Nx monorepo with Cloudflare edge app examples, Supabase boundary placeholders, and shared packages.
 
 This package is currently alpha software. The generated project is intended to be inspectable and useful as a starting point, but it does not create cloud resources, provision Supabase, configure production secrets, or deploy anything automatically.
 
@@ -45,6 +45,12 @@ Read the generated `README.md` and `SETUP.md` before connecting real Cloudflare 
 
 - Node.js 22.12.0 or newer.
 - pnpm 10 or newer for the generated workspace.
+
+## Links
+
+- Docs: https://bankstack.dev/docs/alpha-cli
+- Source: https://github.com/josephbanks/bankstack/tree/main/packages/create-bankstack
+- Issues: https://github.com/josephbanks/bankstack/issues
 
 ## Alpha Notes
 
