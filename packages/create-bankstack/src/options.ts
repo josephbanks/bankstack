@@ -4,7 +4,17 @@ import { stdin as input, stdout as output } from "node:process";
 import * as readline from "node:readline/promises";
 import { parseArgs } from "node:util";
 
+export const AI_TOOLS_PROVIDERS = [
+  "supabase",
+  "cloudflare",
+  "astro",
+  "svelte",
+] as const;
+
+export type AiToolsProvider = (typeof AI_TOOLS_PROVIDERS)[number];
+
 export type ParsedCliOptions = {
+  aiTools?: string;
   directory?: string;
   force: boolean;
   help: boolean;
@@ -16,6 +26,7 @@ export type ParsedCliOptions = {
 };
 
 export type ResolvedCliOptions = {
+  aiTools: AiToolsProvider[];
   force: boolean;
   initializeGit: boolean;
   installDependencies: boolean;
@@ -31,6 +42,7 @@ export function parseCliArgs(args: string[]): ParsedCliOptions {
     allowNegative: true,
     allowPositionals: true,
     options: {
+      "ai-tools": { type: "string" },
       force: { type: "boolean", default: false },
       git: { type: "boolean" },
       help: { type: "boolean", short: "h", default: false },
@@ -49,6 +61,7 @@ export function parseCliArgs(args: string[]): ParsedCliOptions {
   }
 
   return {
+    aiTools: values["ai-tools"],
     directory: positionals[0],
     force: values.force ?? false,
     help: values.help ?? false,
@@ -115,6 +128,38 @@ function validateDirectoryInput(directory: string): string | undefined {
   }
 
   return undefined;
+}
+
+function aiToolsPromptHint(): string {
+  return `recommended, none, or comma-separated providers: ${AI_TOOLS_PROVIDERS.join(",")}`;
+}
+
+function parseAiToolsSelection(value: string): AiToolsProvider[] {
+  const normalized = value.trim().toLowerCase();
+
+  if (normalized === "" || normalized === "none") {
+    return [];
+  }
+
+  if (normalized === "recommended") {
+    return [...AI_TOOLS_PROVIDERS];
+  }
+
+  const selected = normalized
+    .split(",")
+    .map((provider) => provider.trim())
+    .filter(Boolean);
+  const unknown = selected.filter(
+    (provider) => !AI_TOOLS_PROVIDERS.includes(provider as AiToolsProvider),
+  );
+
+  if (unknown.length > 0) {
+    throw new Error(
+      `Unknown --ai-tools provider "${unknown[0]}". Use recommended, none, or a comma-separated list of: ${AI_TOOLS_PROVIDERS.join(", ")}.`,
+    );
+  }
+
+  return AI_TOOLS_PROVIDERS.filter((provider) => selected.includes(provider));
 }
 
 function validateTargetDirectory(
@@ -196,6 +241,23 @@ async function promptBoolean(
   }
 }
 
+async function promptAiTools(
+  rl: readline.Interface,
+): Promise<AiToolsProvider[]> {
+  while (true) {
+    const answer = normalizePromptValue(
+      await rl.question(`AI tooling guidance (${aiToolsPromptHint()}): `),
+      "recommended",
+    );
+
+    try {
+      return parseAiToolsSelection(answer);
+    } catch (error) {
+      console.error(error instanceof Error ? error.message : String(error));
+    }
+  }
+}
+
 export async function resolveOptions(
   parsed: ParsedCliOptions,
 ): Promise<ResolvedCliOptions> {
@@ -257,8 +319,15 @@ export async function resolveOptions(
       (interactive
         ? await promptBoolean(rl, "Initialize a git repository", true)
         : true);
+    const aiTools =
+      parsed.aiTools !== undefined
+        ? parseAiToolsSelection(parsed.aiTools)
+        : interactive
+          ? await promptAiTools(rl)
+          : [];
 
     return {
+      aiTools,
       force: parsed.force,
       initializeGit,
       installDependencies,

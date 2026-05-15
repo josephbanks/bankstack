@@ -13,6 +13,7 @@ const tempRoot = join(tmpdir(), `create-bankstack-golden-${process.pid}`);
 
 const generatedGoldens = [
   "package.json",
+  "AI_TOOLS.md",
   "README.md",
   "SETUP.md",
   "pnpm-workspace.yaml",

@@ -47,6 +47,9 @@ const cliReadme = readWorkspace("packages/create-bankstack/README.md");
 const goldenReadme = readWorkspace(
   "packages/create-bankstack/scripts/goldens/cli/generated/README.md",
 );
+const goldenAiTools = readWorkspace(
+  "packages/create-bankstack/scripts/goldens/cli/generated/AI_TOOLS.md",
+);
 const goldenSetup = readWorkspace(
   "packages/create-bankstack/scripts/goldens/cli/generated/SETUP.md",
 );
@@ -78,6 +81,11 @@ const requiredClaims = [
     "skills/bankstack-expert",
     "distribution docs skill guidance",
   ],
+  [
+    distributionDocs,
+    "--ai-tools recommended",
+    "distribution docs AI tooling option",
+  ],
   [distributionDocs, "GitHub issues", "distribution docs feedback path"],
   [dogfoodDocs, "plans/DOGFOOD.md", "dogfood docs process link"],
   [
@@ -86,6 +94,12 @@ const requiredClaims = [
     "dogfood process generated smoke command",
   ],
   [goldenReadme, "apps/marketing", "generated README marketing app"],
+  [goldenReadme, "AI_TOOLS.md", "generated README AI tooling link"],
+  [
+    goldenAiTools,
+    "Selected provider guidance: `none`",
+    "generated AI tooling default boundary",
+  ],
   [goldenReadme, "apps/dashboard", "generated README dashboard app"],
   [goldenReadme, "apps/api", "generated README API app"],
   [generatedDocs, "apps/marketing", "docs generated marketing app"],

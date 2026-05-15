@@ -1,6 +1,6 @@
 {
   "name": "create-bankstack",
-  "version": "0.1.0-alpha.1",
+  "version": "0.1.0-alpha.2",
   "description": "Create a SaaS-ready Bankstack workspace with Cloudflare, Supabase, Nx, and pnpm.",
   "license": "MIT",
   "author": "Joseph Banks",

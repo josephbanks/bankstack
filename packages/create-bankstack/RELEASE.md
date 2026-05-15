@@ -5,14 +5,14 @@ This checklist records manual `create-bankstack` alpha releases. It does not aut
 ## Current Alpha State
 
 - Package: `create-bankstack`
-- Version: `0.1.0-alpha.1`
+- Version: `0.1.0-alpha.2`
 - Dist tags: `alpha` and `latest`
 - Registry: `https://registry.npmjs.org/`
 - Access: public
 
 ## Published State
 
-`0.1.0-alpha.1` is the current published alpha. On 2026-05-15,
+`0.1.0-alpha.2` is the next alpha patch candidate because source now changes generated package output. `0.1.0-alpha.1` remains the current published alpha. On 2026-05-15,
 `npm view create-bankstack version dist-tags --registry https://registry.npmjs.org/`
 returned:
 
@@ -99,7 +99,7 @@ The alpha package dry run should include:
 - `templates/**`, including workspace templates, placeholder template files, `.env.example`, `.prettierignore`, and Supabase migration placeholders.
 - `package.json`, `README.md`, and `LICENSE`.
 
-On 2026-05-15, the explicit alpha-tagged publish dry run for `0.1.0-alpha.1` reported 71 files, 22.6 kB package size, and 71.6 kB unpacked size.
+On 2026-05-15, the explicit alpha-tagged publish dry run for `0.1.0-alpha.2` reported 72 files, 26.4 kB package size, and 84.5 kB unpacked size, including `templates/workspace/AI_TOOLS.md.template`.
 
 ## Manual Alpha Publish
 

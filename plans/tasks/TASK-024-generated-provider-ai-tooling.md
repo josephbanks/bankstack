@@ -2,7 +2,7 @@
 
 ## Status
 
-Todo
+Done
 
 ## Depends On
 
@@ -70,4 +70,28 @@ Run CLI contract/golden tests, generated-project smoke checks if template output
 
 ## Handoff Notes
 
-None yet.
+Completed in this session:
+
+- Added `--ai-tools <selection>` to `create-bankstack` with `recommended`, `none`, and comma-separated provider selection for `supabase`, `cloudflare`, `astro`, and `svelte`.
+- Kept non-interactive and `--yes` generation local-first with `AI tooling guidance: none`.
+- Added generated `AI_TOOLS.md` guidance as documentation only; the CLI does not run provider installers, write MCP credentials, authenticate with hosted services, or provision resources.
+- Updated package docs, generated goldens, public docs, dogfood verification, and release notes for the `0.1.0-alpha.2` package candidate.
+
+Provider source checks used:
+
+- Supabase AI Tools, MCP, skills, and plugin docs: https://supabase.com/docs/guides/ai-tools, https://supabase.com/docs/guides/ai-tools/mcp, https://supabase.com/docs/guides/ai-tools/ai-skills, https://supabase.com/docs/guides/ai-tools/plugins
+- Cloudflare docs-for-agents and skills: https://developers.cloudflare.com/docs-for-agents/, https://github.com/cloudflare/skills
+- Astro AI/MCP docs: https://docs.astro.build/en/guides/build-with-ai/, https://mcp.docs.astro.build/
+- Svelte AI/MCP docs: https://svelte.dev/docs/ai/overview, https://svelte.dev/docs/ai/mcp, https://svelte.dev/docs/ai/tools
+
+Verification:
+
+- `pnpm format`
+- `pnpm format:check`
+- `pnpm --filter create-bankstack test`
+- `pnpm --filter create-bankstack build`
+- `pnpm --filter create-bankstack pack --dry-run --json`
+- `pnpm --filter create-bankstack publish --dry-run --no-git-checks --tag alpha --access public --registry https://registry.npmjs.org/`
+- `pnpm --filter @bankstack/docs build`
+- `pnpm --filter @bankstack/docs dogfood:verify`
+- `pnpm smoke:generated`

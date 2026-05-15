@@ -22,9 +22,16 @@ For non-interactive runs:
 pnpm dlx create-bankstack@alpha my-bankstack-app --yes
 ```
 
+Provider AI tooling guidance is opt-in:
+
+```sh
+pnpm dlx create-bankstack@alpha my-bankstack-app --ai-tools recommended
+```
+
 Useful flags:
 
 - `--name <name>` sets the package/workspace name used in generated metadata.
+- `--ai-tools <selection>` writes provider AI tooling guidance to `AI_TOOLS.md`. Use `recommended`, `none`, or a comma-separated list of `supabase`, `cloudflare`, `astro`, and `svelte`.
 - `--yes` uses safe defaults for omitted prompts.
 - `--no-install` skips dependency installation.
 - `--no-git` skips git initialization.
@@ -42,6 +49,8 @@ The scaffold includes:
 - `packages/shared-utils`: shared utility package.
 
 Read the generated `README.md` and `SETUP.md` before connecting real Cloudflare or Supabase projects.
+
+When `--ai-tools` is selected, the generated `AI_TOOLS.md` file documents provider-maintained skills and MCP options. It does not run provider installers, write credentials, or authenticate with hosted services.
 
 ## Requirements
 

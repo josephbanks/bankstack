@@ -28,6 +28,7 @@ try {
   );
   const workspaceVariables = (projectName) =>
     variablesForOptions({
+      aiTools: [],
       force: false,
       initializeGit: false,
       installDependencies: false,
@@ -43,9 +44,9 @@ try {
     variables: workspaceVariables("rendered-app"),
   });
 
-  if (renderedFiles.length !== 48) {
+  if (renderedFiles.length !== 49) {
     throw new Error(
-      `Expected 48 rendered files, received ${renderedFiles.length}.`,
+      `Expected 49 rendered files, received ${renderedFiles.length}.`,
     );
   }
 
@@ -57,6 +58,16 @@ try {
   const setupNotes = await readFile(join(targetDirectory, "SETUP.md"), "utf8");
   assertIncludes(setupNotes, "pnpm install", "rendered SETUP notes");
   assertIncludes(setupNotes, "wrangler.jsonc", "rendered SETUP notes");
+
+  const aiToolsNotes = await readFile(
+    join(targetDirectory, "AI_TOOLS.md"),
+    "utf8",
+  );
+  assertIncludes(
+    aiToolsNotes,
+    "Selected provider guidance: `none`",
+    "rendered AI tooling notes",
+  );
 
   const packageJson = await readFile(
     join(targetDirectory, "package.json"),

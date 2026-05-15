@@ -3,6 +3,7 @@
 import { relative } from "node:path";
 
 import {
+  AI_TOOLS_PROVIDERS,
   parseCliArgs,
   resolveOptions,
   type ResolvedCliOptions,
@@ -23,6 +24,9 @@ function printHelp(): void {
   console.log("Options:");
   console.log(
     "  --name <name>   Project/package name to use in generated metadata.",
+  );
+  console.log(
+    `  --ai-tools <selection>  Add generated AI tooling guidance: recommended, none, or ${AI_TOOLS_PROVIDERS.join(",")}.`,
   );
   console.log("  --yes           Use safe defaults for omitted choices.");
   console.log(
@@ -47,6 +51,8 @@ function formatDirectoryForOutput(targetDirectory: string): string {
 
 function printResolvedOptions(options: ResolvedCliOptions): void {
   const directory = formatDirectoryForOutput(options.targetDirectory);
+  const aiTools =
+    options.aiTools.length > 0 ? options.aiTools.join(", ") : "none";
 
   console.log("create-bankstack");
   console.log(`version ${readPackageVersion()}`);
@@ -59,6 +65,7 @@ function printResolvedOptions(options: ResolvedCliOptions): void {
   );
   console.log(`  Initialize git: ${options.initializeGit ? "yes" : "no"}`);
   console.log(`  Force non-empty directory: ${options.force ? "yes" : "no"}`);
+  console.log(`  AI tooling guidance: ${aiTools}`);
 }
 
 function printRenderSummary(

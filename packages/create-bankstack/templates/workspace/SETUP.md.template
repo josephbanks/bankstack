@@ -77,3 +77,7 @@ References:
 ## v0.1 Limits
 
 Bankstack v0.1 is scaffolding plus conventions. It intentionally does not include Python compute, product tables, background workers, deployment automation, or a complete Supabase Auth UI.
+
+## Provider AI Tooling
+
+Optional provider AI tooling guidance, when selected, is written to [AI_TOOLS.md](AI_TOOLS.md). It is safe documentation only: no provider installer commands are run, no MCP credentials are written, and no Cloudflare or Supabase resources are provisioned.

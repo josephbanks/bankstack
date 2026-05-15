@@ -43,7 +43,7 @@ await mkdir(tempRoot, { recursive: true });
 try {
   let result = run(["--version"]);
   assertExit(result, 0, "--version");
-  assertIncludes(result.stdout, "0.1.0-alpha.1", "--version stdout");
+  assertIncludes(result.stdout, "0.1.0-alpha.2", "--version stdout");
 
   result = run(["--yes", "--no-install", "--no-git"], { cwd: tempRoot });
   assertExit(result, 0, "--yes flow");
@@ -55,7 +55,7 @@ try {
   assertIncludes(result.stdout, "Install dependencies: no", "--yes stdout");
   assertIncludes(
     result.stdout,
-    "Rendered workspace foundation with 48 files.",
+    "Rendered workspace foundation with 49 files.",
     "--yes stdout",
   );
   await assertRenderedWorkspace(
@@ -75,7 +75,7 @@ try {
   );
   assertIncludes(
     result.stdout,
-    "Rendered workspace foundation with 48 files.",
+    "Rendered workspace foundation with 49 files.",
     "explicit flags stdout",
   );
   await assertRenderedWorkspace(join(tempRoot, "sample-app"), "sample-app");
@@ -83,6 +83,43 @@ try {
   result = run(["--help"]);
   assertExit(result, 0, "--help");
   assertIncludes(result.stdout, "Usage:", "--help stdout");
+  assertIncludes(result.stdout, "--ai-tools", "--help stdout");
+
+  result = run(
+    [
+      "ai-guided-app",
+      "--name",
+      "ai-guided-app",
+      "--ai-tools",
+      "supabase,astro",
+      "--no-install",
+      "--no-git",
+    ],
+    {
+      cwd: tempRoot,
+    },
+  );
+  assertExit(result, 0, "AI tooling provider flags");
+  assertIncludes(
+    result.stdout,
+    "AI tooling guidance: supabase, astro",
+    "AI tooling provider stdout",
+  );
+  await assertRenderedWorkspace(
+    join(tempRoot, "ai-guided-app"),
+    "ai-guided-app",
+  );
+  const aiTools = await readFile(
+    join(tempRoot, "ai-guided-app", "AI_TOOLS.md"),
+    "utf8",
+  );
+  assertIncludes(aiTools, "Supabase", "AI tooling generated notes");
+  assertIncludes(aiTools, "Astro Docs MCP", "AI tooling generated notes");
+  assertIncludes(
+    aiTools,
+    "does not run provider installers",
+    "AI tooling generated notes",
+  );
 
   result = run(["BadName", "--name", "BadName"], { cwd: tempRoot });
   assertExit(result, 1, "invalid name");

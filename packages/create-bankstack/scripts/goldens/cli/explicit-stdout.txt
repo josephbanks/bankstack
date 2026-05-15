@@ -1,5 +1,5 @@
 create-bankstack
-version 0.1.0-alpha.1
+version 0.1.0-alpha.2
 
 Resolved options:
   Project name: golden-stack
@@ -7,8 +7,9 @@ Resolved options:
   Install dependencies: no
   Initialize git: no
   Force non-empty directory: no
+  AI tooling guidance: none
 
-Rendered workspace foundation with 48 files.
+Rendered workspace foundation with 49 files.
 
 Next steps:
   cd golden-stack

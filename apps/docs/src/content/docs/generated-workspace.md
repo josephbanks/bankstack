@@ -48,4 +48,6 @@ pnpm verify
 
 `pnpm dev` starts the generated app surfaces through Nx. The generated `README.md` and `SETUP.md` remain the canonical source for exact local ports and template-specific commands.
 
+When selected with `--ai-tools`, generated `AI_TOOLS.md` documents provider-maintained skills and MCP guidance for Supabase, Cloudflare, Astro, and Svelte. It is a safe reference file only; the CLI does not run those provider installers or create credentials.
+
 Canonical source material: generated [`README.md`](https://github.com/josephbanks/bankstack/blob/main/packages/create-bankstack/scripts/goldens/cli/generated/README.md) and [`SETUP.md`](https://github.com/josephbanks/bankstack/blob/main/packages/create-bankstack/scripts/goldens/cli/generated/SETUP.md).

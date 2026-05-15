@@ -23,6 +23,14 @@ npx create-bankstack@alpha my-bankstack-app
 
 After generation, read the generated `README.md` and `SETUP.md`. Those files are the source for the generated app/package layout, local verification commands, Cloudflare boundary, Supabase boundary, and current v0.1 limits.
 
+For provider-maintained AI tooling guidance, choose an explicit docs-only option:
+
+```bash
+pnpm dlx create-bankstack@alpha my-bankstack-app --ai-tools recommended
+```
+
+You can also use `--ai-tools none` or a comma-separated provider list such as `--ai-tools supabase,cloudflare,astro,svelte`. The generated `AI_TOOLS.md` file explains current provider docs, skills, and MCP surfaces without running installers, writing credentials, or provisioning hosted resources.
+
 ## Existing Projects: Use The Skill
 
 The Bankstack expert skill lives in [`skills/bankstack-expert`](https://github.com/josephbanks/bankstack/tree/main/skills/bankstack-expert). Copy or reference that folder from a local or repo-scoped skills location your coding agent reads, keeping `SKILL.md` with `agents/openai.yaml`.
@@ -42,7 +50,7 @@ Do not treat the skill as a replacement for the CLI. It cannot generate the work
 - Generated projects are pnpm-only and expect Node.js 22.12.0 or newer.
 - The scaffold includes Astro, SvelteKit, Hono, Cloudflare config examples, Supabase boundary placeholders, and shared packages.
 - The scaffold does not include production provisioning, a full Supabase Auth UI, generated product tables, deployment automation, or the optional Python compute layer.
-- Provider-maintained AI tooling guidance is planned as an opt-in generated-project surface, not a default installer.
+- Provider-maintained AI tooling guidance is opt-in and documentation-only. It complements `skills/bankstack-expert`; it does not replace the Bankstack skill or force a specific agent.
 
 ## Feedback Path
 
