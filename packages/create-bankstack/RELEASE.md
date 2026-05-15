@@ -1,14 +1,35 @@
 # create-bankstack Alpha Release Checklist
 
-This checklist prepares the manual `create-bankstack@0.1.0-alpha.0` npm release. It does not automate publishing and does not require npm tokens in CI.
+This checklist records the manual `create-bankstack@0.1.0-alpha.0` npm release. It does not automate publishing and does not require npm tokens in CI.
 
 ## Current Alpha Target
 
 - Package: `create-bankstack`
 - Version: `0.1.0-alpha.0`
-- Dist tag: `alpha`
+- Intended dist tag: `alpha`
 - Registry: `https://registry.npmjs.org/`
 - Access: public
+- GitHub Actions candidate run: https://github.com/josephbanks/bankstack/actions/runs/25922733713
+
+## Published State
+
+Published on 2026-05-15 as `create-bankstack@0.1.0-alpha.0`.
+
+Registry verification:
+
+```sh
+npm view create-bankstack@0.1.0-alpha.0 version --registry https://registry.npmjs.org/
+npm view create-bankstack dist-tags --registry https://registry.npmjs.org/
+```
+
+Observed result:
+
+```text
+0.1.0-alpha.0
+{ alpha: '0.1.0-alpha.0', latest: '0.1.0-alpha.0' }
+```
+
+The alpha tag is correct. npm also assigned `latest` to this first and only package version. Removing `latest` with `npm dist-tag rm create-bankstack latest --registry https://registry.npmjs.org/` returned `E400 Bad Request`, so leave `latest` as-is until a stable release can intentionally move it to a stable version. Do not unpublish the alpha to adjust dist-tags.
 
 ## Source-Backed Notes
 
@@ -76,4 +97,4 @@ npm view create-bankstack@0.1.0-alpha.0 version --registry https://registry.npmj
 npm view create-bankstack dist-tags --registry https://registry.npmjs.org/
 ```
 
-Expected result: `0.1.0-alpha.0` exists and the `alpha` dist-tag points at it. Do not move `latest` during the alpha release.
+Expected result: `0.1.0-alpha.0` exists and the `alpha` dist-tag points at it. npm may keep `latest` pointed at the first and only version; if removing `latest` returns `E400 Bad Request`, leave it as-is and move `latest` intentionally on the first stable release.

@@ -48,4 +48,4 @@ Read the generated `README.md` and `SETUP.md` before connecting real Cloudflare 
 
 ## Alpha Notes
 
-The first alpha is published under the `alpha` dist-tag. Install with `create-bankstack@alpha` until the project intentionally promotes a stable release.
+The first alpha is published under the `alpha` dist-tag. Because it is currently the only published version, npm also points `latest` at `0.1.0-alpha.0`. Prefer explicit `create-bankstack@alpha` installs until the project intentionally promotes a stable release.
