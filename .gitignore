@@ -69,3 +69,6 @@ Thumbs.db
 # Logs & misc
 *.log
 .cache/
+
+# NPM
+.npmrc
