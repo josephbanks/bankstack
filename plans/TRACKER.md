@@ -67,9 +67,9 @@ TASK-000
 
 ## Phase 5: Alpha Publish
 
-| ID       | Task                                                       | Status | Depends On | Blocks   | Owner/Session | Acceptance Summary                                                                     |
-| -------- | ---------------------------------------------------------- | ------ | ---------- | -------- | ------------- | -------------------------------------------------------------------------------------- |
-| TASK-013 | [Alpha Publish Prep](tasks/TASK-013-alpha-publish-prep.md) | Todo   | TASK-012   | TASK-014 | Unassigned    | npm name availability, package metadata, and manual alpha release checklist are ready. |
+| ID       | Task                                                       | Status | Depends On | Blocks   | Owner/Session                | Acceptance Summary                                                                     |
+| -------- | ---------------------------------------------------------- | ------ | ---------- | -------- | ---------------------------- | -------------------------------------------------------------------------------------- |
+| TASK-013 | [Alpha Publish Prep](tasks/TASK-013-alpha-publish-prep.md) | Done   | TASK-012   | TASK-014 | Codex implementation session | npm name availability, package metadata, and manual alpha release checklist are ready. |
 
 ## Phase 6: Dogfood Site
 
