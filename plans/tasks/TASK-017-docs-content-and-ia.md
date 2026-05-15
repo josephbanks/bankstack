@@ -2,7 +2,7 @@
 
 ## Status
 
-Todo
+Done
 
 ## Depends On
 
@@ -56,6 +56,19 @@ If content work exposes mismatches between public docs and CLI templates, captur
 Build and check the docs app. Read the rendered pages against the source docs and generated golden docs. If feasible, inspect the local site in a browser for navigation, copy, and responsive readability.
 
 ## Handoff Notes
+
+Completed the initial public docs IA with an Astro content collection, a `/docs/` hub, generated docs routes, and six alpha-honest pages: what Bankstack is, alpha CLI, generated workspace, Cloudflare boundary, Supabase boundary, and dogfood/future skill alignment. Content was checked against `VISION.md`, `ARCHITECTURE_OVERVIEW.md`, `SETUP_GUIDE.md`, `packages/create-bankstack/README.md`, and generated golden `README.md`/`SETUP.md`.
+
+Known follow-up: the public docs now curate `SETUP_GUIDE.md`, but that source file still reads like a manual bootstrap guide rather than the primary CLI-era user path. Update or archive that source separately if it starts confusing readers.
+
+Verification completed:
+
+- `pnpm --filter @bankstack/docs check`
+- `pnpm --filter @bankstack/docs build`
+- `pnpm check`
+- `pnpm build`
+- `pnpm --filter create-bankstack test`
+- Browser inspection of `/docs/` and `/docs/supabase-boundary/` at `http://127.0.0.1:4321/`
 
 TASK-018 should add deployment and dogfood verification only after this content exists, so deployment proves a real docs surface rather than a placeholder.
 

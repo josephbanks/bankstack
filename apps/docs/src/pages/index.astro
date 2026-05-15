@@ -1,5 +1,10 @@
 ---
+import { getCollection } from "astro:content";
 import SiteLayout from "../layouts/SiteLayout.astro";
+import { sortDocs } from "../lib/docs";
+import { currentAlphaVersion } from "../lib/package";
+
+const docs = sortDocs(await getCollection("docs"));
 ---
 
 <SiteLayout
@@ -16,8 +21,12 @@ import SiteLayout from "../layouts/SiteLayout.astro";
           Cloudflare edge plus Supabase split stack.
         </p>
         <div class="actions" aria-label="Primary actions">
-          <a class="button" data-kind="primary" href="#install">Install alpha</a>
-          <a class="button" href="#shape">View generated shape</a>
+          <a class="button" data-kind="primary" href="/docs/alpha-cli/"
+            >Install alpha</a
+          >
+          <a class="button" href="/docs/generated-workspace/"
+            >View generated shape</a
+          >
         </div>
       </div>
       <div class="stack-map" aria-label="Bankstack generated workspace map">
@@ -36,6 +45,29 @@ import SiteLayout from "../layouts/SiteLayout.astro";
       </div>
     </section>
 
+    <section class="section" aria-labelledby="docs-title">
+      <div>
+        <p class="eyebrow">Read the docs</p>
+        <h2 id="docs-title">Start with the alpha map</h2>
+      </div>
+      <div class="section__body">
+        <p>
+          These pages turn the repo source material into public docs while
+          keeping generated-template behavior as the source of truth.
+        </p>
+        <div class="doc-grid">
+          {
+            docs.map((doc) => (
+              <a class="doc-link" href={`/docs/${doc.id}/`}>
+                <span>{doc.data.title}</span>
+                <small>{doc.data.description}</small>
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
     <section class="section" id="install" aria-labelledby="install-title">
       <div>
         <p class="eyebrow">Install</p>
@@ -43,8 +75,8 @@ import SiteLayout from "../layouts/SiteLayout.astro";
       </div>
       <div class="section__body">
         <p>
-          The current published alpha is <code>0.1.0-alpha.0</code>. Prefer the
-          explicit alpha tag until Bankstack intentionally promotes a stable
+          The current repo alpha is <code>{currentAlphaVersion}</code>. Prefer
+          the explicit alpha tag until Bankstack intentionally promotes a stable
           release.
         </p>
         <div class="command-list" aria-label="Alpha install commands">
@@ -68,8 +100,8 @@ import SiteLayout from "../layouts/SiteLayout.astro";
         </p>
         <p class="note">
           This docs app is intentionally static for the foundation slice. Future
-          content can move into Astro content collections without adding server
-          rendering unless a real docs feature needs it.
+          content now lives in Astro content collections without adding server
+          rendering.
         </p>
       </div>
     </section>

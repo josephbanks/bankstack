@@ -1,0 +1,33 @@
+---
+import { getCollection } from "astro:content";
+import SiteLayout from "../../layouts/SiteLayout.astro";
+import { sortDocs } from "../../lib/docs";
+
+const docs = sortDocs(await getCollection("docs"));
+---
+
+<SiteLayout
+  title="Docs"
+  description="Bankstack alpha documentation for the CLI, generated workspace, and Cloudflare plus Supabase conventions."
+>
+  <div class="page page--narrow">
+    <section aria-labelledby="docs-title">
+      <p class="eyebrow">Docs</p>
+      <h1 id="docs-title">Bankstack docs</h1>
+      <p class="lede">
+        Start with the alpha CLI, then read the generated workspace and boundary
+        docs before connecting real infrastructure.
+      </p>
+    </section>
+    <section class="doc-grid doc-grid--hub" aria-label="Docs pages">
+      {
+        docs.map((doc) => (
+          <a class="doc-link" href={`/docs/${doc.id}/`}>
+            <span>{doc.data.title}</span>
+            <small>{doc.data.description}</small>
+          </a>
+        ))
+      }
+    </section>
+  </div>
+</SiteLayout>
