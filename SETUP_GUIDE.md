@@ -1,8 +1,19 @@
-# Setup Guide: Initializing the Split-Stack Monorepo
+# Setup Guide: Historical Split-Stack Bootstrap Reference
+
+Bankstack's alpha user path is the published CLI, not manual Nx assembly. For a
+new project, run `pnpm dlx create-bankstack@alpha my-bankstack-app` or
+`npx create-bankstack@alpha my-bankstack-app`, then read the generated
+`README.md` and `SETUP.md` before connecting Cloudflare or Supabase.
+
+This file is retained as a source reference for the decisions the CLI now
+encodes: the intended app/package boundaries, Cloudflare service-binding shape,
+Supabase edge-auth boundary, and optional compute direction. Treat the commands
+below as historical bootstrap notes, not the recommended first step for alpha
+users.
 
 ## 1. Initialize the Workspace
 
-Use pnpm for the fastest dependency resolution in 2026.
+Historical note: this was the pre-CLI manual workspace bootstrap.
 
 ```bash
 npx create-nx-workspace@latest platform-root --preset=apps --packageManager=pnpm
@@ -73,7 +84,7 @@ Configure your apps/dashboard/wrangler.jsonc to talk to the Hono API worker inte
 
 ## 5. AI Agent Guardrails (`AGENTS.md`)
 
-To manage multiple AI coding assistants (Cursor, Claude Code, Codex) and prevent them from hallucinating across language boundaries, we use the `AGENTS.md` standard. You will write the rules once per app, and then configure your specific tools to point to that single source of truth.
+Generated Bankstack projects may add agent guidance over time. In this historical reference, the app-level `AGENTS.md` examples show how boundaries can be written once per app and shared with tools that support them.
 
 ## 1. Create AGENTS.md files
 

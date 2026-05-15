@@ -25,4 +25,4 @@ The alpha centers on `create-bankstack`, a published Node CLI that generates a w
 - It does not deploy the generated workspace.
 - It does not include the optional Python compute layer in the v0.1 alpha.
 
-Canonical source material: [`VISION.md`](https://github.com/josephbanks/bankstack/blob/main/VISION.md), [`ARCHITECTURE_OVERVIEW.md`](https://github.com/josephbanks/bankstack/blob/main/ARCHITECTURE_OVERVIEW.md), and [`SETUP_GUIDE.md`](https://github.com/josephbanks/bankstack/blob/main/SETUP_GUIDE.md).
+Canonical source material: [`VISION.md`](https://github.com/josephbanks/bankstack/blob/main/VISION.md), [`ARCHITECTURE_OVERVIEW.md`](https://github.com/josephbanks/bankstack/blob/main/ARCHITECTURE_OVERVIEW.md), and the generated workspace docs under [`packages/create-bankstack`](https://github.com/josephbanks/bankstack/tree/main/packages/create-bankstack). [`SETUP_GUIDE.md`](https://github.com/josephbanks/bankstack/blob/main/SETUP_GUIDE.md) is retained as historical/deep-reference context, not the alpha setup entrypoint.

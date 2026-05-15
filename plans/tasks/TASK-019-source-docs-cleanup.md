@@ -2,7 +2,7 @@
 
 ## Status
 
-Todo
+Done
 
 ## Depends On
 
@@ -45,4 +45,14 @@ Run formatting and docs checks. Review links that mention `SETUP_GUIDE.md` and c
 
 ## Handoff Notes
 
-None yet.
+Completed in this session:
+
+- Reframed `SETUP_GUIDE.md` as historical/deep-reference context instead of the alpha setup entrypoint.
+- Updated `README.md`, `VISION.md`, and public docs source links so `create-bankstack@alpha` plus generated `README.md`/`SETUP.md` is the default user path.
+- Verified no user-facing source-doc references still present manual Nx bootstrapping as the preferred first step.
+
+Verification:
+
+- `pnpm format:check`
+- `pnpm --filter @bankstack/docs build`
+- `pnpm --filter @bankstack/docs dogfood:verify`

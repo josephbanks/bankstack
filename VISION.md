@@ -17,13 +17,13 @@ This **bankstack** repository is also the **canonical dogfood**: the public site
 | Document                                             | Role                                                                                     |
 | ---------------------------------------------------- | ---------------------------------------------------------------------------------------- |
 | [ARCHITECTURE_OVERVIEW.md](ARCHITECTURE_OVERVIEW.md) | **What** you are building: topology, Cloudflare deployment, security and auth.           |
-| [SETUP_GUIDE.md](SETUP_GUIDE.md)                     | **How** to assemble it step by step today—and what the CLI should eventually automate.   |
+| [SETUP_GUIDE.md](SETUP_GUIDE.md)                     | Historical/deep-reference notes for the manual bootstrap path the CLI now encodes.       |
 | This file                                            | **Why** the monorepo is shaped this way and **what** ships to users (CLI, site, skills). |
 
 ## Delivery surfaces
 
 1. **`packages/create-bankstack` (npm / pnpm)**  
-   The code published to npm. The planned experience is: run something like `pnpm dlx create-bankstack@latest` or `npx create-bankstack@latest` (exact package and binary names follow whatever you publish) to generate a new workspace that reflects [ARCHITECTURE_OVERVIEW.md](ARCHITECTURE_OVERVIEW.md) and [SETUP_GUIDE.md](SETUP_GUIDE.md). Future template work should make provider AI tooling an explicit choice, so teams can opt into maintained skills/MCP guidance for Cloudflare, Supabase, Astro, Svelte, and related stack pieces without changing the default local-first scaffold.
+   The code published to npm. The alpha experience is: run `pnpm dlx create-bankstack@alpha my-app` or `npx create-bankstack@alpha my-app` to generate a new workspace, then inspect the generated `README.md` and `SETUP.md` before connecting real Cloudflare or Supabase resources. The generated workspace reflects [ARCHITECTURE_OVERVIEW.md](ARCHITECTURE_OVERVIEW.md) while [SETUP_GUIDE.md](SETUP_GUIDE.md) remains historical/deep-reference context. Future template work should make provider AI tooling an explicit choice, so teams can opt into maintained skills/MCP guidance for Cloudflare, Supabase, Astro, Svelte, and related stack pieces without changing the default local-first scaffold.
 
 2. **`apps/*` (example and docs)**  
    Applications in this repo demonstrate the stack in production use. A docs or marketing app proves the same adapters, bindings, and patterns consumers get from the CLI.
