@@ -2,18 +2,30 @@
 
 This checklist records manual `create-bankstack` alpha releases. It does not automate publishing and does not require npm tokens in CI.
 
-## Current Alpha Target
+## Current Alpha State
 
 - Package: `create-bankstack`
 - Version: `0.1.0-alpha.1`
-- Intended dist tag: `alpha`
+- Dist tags: `alpha` and `latest`
 - Registry: `https://registry.npmjs.org/`
 - Access: public
-- GitHub Actions candidate run: https://github.com/josephbanks/bankstack/actions/runs/25931386359
 
 ## Published State
 
-`0.1.0-alpha.1` is the next planned alpha. Publish it after `https://bankstack.dev/docs/alpha-cli/` is live, local verification passes, and the GitHub Actions candidate run is green.
+`0.1.0-alpha.1` is the current published alpha. On 2026-05-15,
+`npm view create-bankstack version dist-tags --registry https://registry.npmjs.org/`
+returned:
+
+```text
+version = '0.1.0-alpha.1'
+dist-tags = { latest: '0.1.0-alpha.1', alpha: '0.1.0-alpha.1' }
+```
+
+Use explicit `create-bankstack@alpha` install commands in docs until a stable
+release intentionally becomes the default path. Because `latest` already points
+at an alpha for this package, keep `alpha` and `latest` aligned for alpha patch
+releases so the npm package page reflects the current alpha metadata. Do not
+unpublish alpha versions to adjust dist-tags.
 
 ### Previous alpha.0
 
@@ -40,20 +52,25 @@ The alpha tag is correct. npm also assigned `latest` to this first and only pack
 - npm package names and versions form the unique publish identifier, and a name/version cannot be reused after publication.
 - `npm pack --dry-run` is the official way to inspect package contents before publication.
 - The package `files` list limits publication to the listed entries, subject to npm's always-included package files.
-- `publishConfig` records intended publish-time defaults such as `tag`, `registry`, and `access`, but the manual commands below pass `--tag alpha` and `--access public` explicitly because `pnpm publish --dry-run` reported `latest` without an explicit tag in this repository.
-- pnpm's `publish --dry-run` performs publish preparation without publishing, and an explicit `--tag alpha` prevents the alpha from becoming the default `latest` install target.
+- npm publishes to the `latest` dist-tag by default unless `--tag <tag>` is provided; npm's dist-tag docs describe `latest` as the default install target and recommend non-`latest` tags for unstable versions.
+- `publishConfig` records intended publish-time defaults such as `tag`, `registry`, and `access`, but the manual commands below pass `--tag alpha` and `--access public` explicitly because `pnpm publish --dry-run` has reported `latest` without an explicit tag in this repository.
+- pnpm's `publish --dry-run` performs publish preparation without publishing, and an explicit `--tag alpha` keeps the alpha stream intentional.
 
-## Name Availability
+Source checks used for this cadence update:
 
-On 2026-05-15, `npm view create-bankstack version --registry https://registry.npmjs.org/` returned `E404 Not Found`, meaning no public package version was found for `create-bankstack` at the npm registry at the time of this prep.
+- npm: Adding dist-tags to packages, https://docs.npmjs.com/adding-dist-tags-to-packages/
+- npm CLI: `npm publish`, https://docs.npmjs.com/cli/v11/commands/npm-publish/
+- npm CLI: `npm dist-tag`, https://docs.npmjs.com/cli/v11/commands/npm-dist-tag/
 
-Re-run the check immediately before publishing:
+## Alpha Patch Cadence
 
-```sh
-npm view create-bankstack version --registry https://registry.npmjs.org/
-```
+Publish another alpha patch when one of these is true:
 
-If the name becomes unavailable, stop and choose the smallest package identity change before publishing.
+- A generated-template or CLI behavior fix should be available to new projects before stable promotion.
+- Public docs or package metadata changed in a way that users will see from npm.
+- Dogfood or generated-project verification found a drift fix that should be distributed.
+
+Do not publish for tracker-only note changes, internal planning updates, or docs-only changes that are already live on `bankstack.dev` and do not affect package contents.
 
 ## Required Local Verification
 
@@ -82,9 +99,9 @@ The alpha package dry run should include:
 - `templates/**`, including workspace templates, placeholder template files, `.env.example`, `.prettierignore`, and Supabase migration placeholders.
 - `package.json`, `README.md`, and `LICENSE`.
 
-On 2026-05-15, the explicit alpha-tagged publish dry run reported 71 files, 22.6 kB package size, and 71.6 kB unpacked size.
+On 2026-05-15, the explicit alpha-tagged publish dry run for `0.1.0-alpha.1` reported 71 files, 22.6 kB package size, and 71.6 kB unpacked size.
 
-## Manual Publish
+## Manual Alpha Publish
 
 From the repository root, after all verification passes and the npm account is authenticated:
 
@@ -97,13 +114,32 @@ If your npm account requires two-factor authentication, follow the prompt or pas
 After publishing:
 
 ```sh
-npm view create-bankstack@0.1.0-alpha.1 version --registry https://registry.npmjs.org/
+npm view create-bankstack@<version> version --registry https://registry.npmjs.org/
 npm view create-bankstack dist-tags --registry https://registry.npmjs.org/
 ```
 
-Expected result: `0.1.0-alpha.1` exists and the `alpha` dist-tag points at it. If npm keeps `latest` pointed at `0.1.0-alpha.0`, decide whether the package page should show the new metadata immediately. Because `latest` already points at an alpha for this package, it is acceptable to move `latest` intentionally to `0.1.0-alpha.1` after verifying the publish:
+Expected result: the published version exists and the `alpha` dist-tag points at it. If npm keeps `latest` pointed at the previous alpha, move `latest` intentionally to the same version so both alpha-era tags stay aligned:
 
 ```sh
-npm dist-tag add create-bankstack@0.1.0-alpha.1 latest --registry https://registry.npmjs.org/
+npm dist-tag add create-bankstack@<version> latest --registry https://registry.npmjs.org/
 npm view create-bankstack dist-tags --registry https://registry.npmjs.org/
 ```
+
+## Stable Promotion Path
+
+Do not promote to stable on a date alone. Prepare a stable release only when the
+CLI, generated workspace, public docs, and dogfood checks have all stayed
+aligned across real alpha usage.
+
+Before the first stable release:
+
+- Choose a stable semver such as `0.1.0` or the next appropriate non-prerelease.
+- Remove alpha-only caveats from docs only where the stable behavior really exists.
+- Run the full local verification sequence and confirm the CI candidate commit is green.
+- Publish without `--tag alpha`, or publish with `--tag latest`, so npm's default install target points at the stable version.
+- Keep the `alpha` dist-tag available for future prerelease builds instead of deleting alpha history.
+
+Open release questions:
+
+- Decide whether stable promotion should also create a GitHub Release with generated package contents and smoke-test evidence.
+- Decide whether post-stable alpha builds use `alpha`, `next`, or another prerelease dist-tag.

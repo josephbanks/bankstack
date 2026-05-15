@@ -2,7 +2,7 @@
 
 ## Status
 
-Todo
+Done
 
 ## Depends On
 
@@ -45,4 +45,18 @@ Run formatting checks. If npm behavior or dist-tag status is referenced, verify 
 
 ## Handoff Notes
 
-None yet.
+Completed in this session:
+
+- Updated `packages/create-bankstack/RELEASE.md` to reflect the live `0.1.0-alpha.1` registry state and dist-tag reality.
+- Added alpha patch release cadence criteria and a separate stable promotion path without promising a date.
+- Recorded npm primary-source references for dist-tags and publish behavior.
+
+Verification:
+
+- `npm view create-bankstack version dist-tags --registry https://registry.npmjs.org/`
+- `pnpm format:check`
+- `pnpm --filter create-bankstack test`
+- `pnpm --filter create-bankstack build`
+- `pnpm --filter create-bankstack pack --dry-run`
+- `pnpm --filter create-bankstack publish --dry-run --tag alpha --access public --registry https://registry.npmjs.org/` refused to run on the intentionally dirty task worktree.
+- `pnpm --filter create-bankstack publish --dry-run --no-git-checks --tag alpha --access public --registry https://registry.npmjs.org/` required escalated network access after a sandbox DNS/cache failure, then succeeded with `There are no new packages that should be published` because `0.1.0-alpha.1` is already live.
