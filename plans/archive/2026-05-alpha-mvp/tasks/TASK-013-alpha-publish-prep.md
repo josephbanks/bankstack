@@ -53,7 +53,7 @@ Implemented the manual alpha publish prep for `create-bankstack@0.1.0-alpha.0`:
 - Added npm-facing package metadata, package-local `README.md`, package-local `LICENSE`, and `publishConfig` to `packages/create-bankstack`.
 - Added `packages/create-bankstack/RELEASE.md` with the alpha release target, name availability check, verification sequence, package contents expectations, and the manual publish command.
 - Confirmed `.github/workflows/ci.yml` is correct for the current full-check CI path: `actions/checkout@v6`, `pnpm/action-setup@v6`, `actions/setup-node@v6` with `cache: pnpm`, frozen install, format, check, package tests, and generated smoke test. If CI later switches to `nx affected`, update checkout history and base/head handling instead of assuming the current shallow checkout is enough.
-- Final candidate CI passed at https://github.com/josephbanks/bankstack/actions/runs/25922733713 before publication.
+- Final candidate CI passed at https://github.com/josephbanks/bankstack/actions/runs/25950525368 before publication.
 - Published `create-bankstack@0.1.0-alpha.0` to npm on 2026-05-15. Registry verification returned version `0.1.0-alpha.0` and dist-tags `{ alpha: '0.1.0-alpha.0', latest: '0.1.0-alpha.0' }`.
 - npm also assigned `latest` to the first and only published version. Attempting `npm dist-tag rm create-bankstack latest --registry https://registry.npmjs.org/` returned `E400 Bad Request`, so the package remains live with both `alpha` and `latest` pointing at `0.1.0-alpha.0`. Do not unpublish; move `latest` intentionally on the first stable release.
 
